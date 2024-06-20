@@ -51,7 +51,7 @@ jobs:
           branch: upgrade-flux
           base: main
           title: "Upgrade flux to ${{ needs.has-new-flux.outputs.version }}"
-          token: ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             Upgrade the flux version used by gitops run and the package
             dependencies.
