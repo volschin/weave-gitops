@@ -1,11 +1,11 @@
-ARG FLUX_VERSION=0.24.1
+ARG FLUX_VERSION=2.3.0
 ARG FLUX_CLI=ghcr.io/fluxcd/flux-cli:v$FLUX_VERSION
 
 # Alias for flux
 FROM $FLUX_CLI as flux
 
 # Go build
-FROM golang:1.20 AS go-build
+FROM golang:1.22 AS go-build
 
 # Add known_hosts entries for GitHub and GitLab
 RUN mkdir ~/.ssh
