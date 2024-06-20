@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         statsRepo:
-        - weaveworks/weave-gitops
+        - volschin/weave-gitops
       fail-fast: false
       max-parallel: 1
     steps:
@@ -25,4 +25,4 @@ jobs:
         uses: jgehrcke/github-repo-stats@306db38ad131cab2aa5f2cd3062bf6f8aa78c1aa # v1.4.2
         with:
           repository: ${{ matrix.statsRepo }}
-          ghtoken: ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}
+          ghtoken: ${{ secrets.GITHUB_TOKEN }}
