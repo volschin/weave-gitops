@@ -1,5 +1,5 @@
 # UI build
-FROM node:20-bullseye AS ui
+FROM node:22-bullseye AS ui
 RUN apt-get update -y && apt-get install -y build-essential
 RUN mkdir -p /home/app && chown -R node:node /home/app
 WORKDIR /home/app
