@@ -10,10 +10,6 @@ on:
 permissions:
   contents: read # for actions/checkout to fetch code
 
-env:
-  CI_CONTAINER_REGISTRY: europe-west1-docker.pkg.dev
-  CI_CONTAINER_REPOSITORY: europe-west1-docker.pkg.dev/weave-gitops-clusters/weave-gitops
-
 name: PR CI Workflow
 jobs:
   ci-js:
@@ -77,8 +73,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [1.20.X]
-        node-version: [16.X]
+        go-version: [1.22.X]
+        node-version: [18.X]
     steps:
       - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
       - name: Setup Go
@@ -156,25 +152,13 @@ jobs:
           - gitops-server
     steps:
       - uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
-      - uses: google-github-actions/setup-gcloud@e30db14379863a8c79331b04a9969f4c1e225e0b # v1.1.1
+ #     - uses: google-github-actions/setup-gcloud@e30db14379863a8c79331b04a9969f4c1e225e0b # v1.1.1
       - name: Download cached docker image
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with:
           name: ${{ matrix.docker-image }}
           path: /tmp
-      - name: Authenticate to Google Cloud
-        id: gcloud-auth
-        uses: google-github-actions/auth@35b0e87d162680511bf346c299f71c9c5c379033 # v1.1.1
-        with:
-          service_account: ${{ secrets.service_account }}
-          workload_identity_provider: ${{ secrets.workload_identity_provider }}
-      - name: Login to gcloud for docker
-        run: gcloud --quiet auth configure-docker ${{ env.CI_CONTAINER_REGISTRY }}
-      - name: Push images to gcloud
-        run: |
-          docker load --input /tmp/${{ matrix.docker-image }}.tar
-          docker push "${{ env.CI_CONTAINER_REPOSITORY }}/${{ matrix.docker-image }}:${{ needs.ci-generate-tag.outputs.tag }}"
-
+      
   ci-upload-binary:
     name: Upload Binary
     runs-on: ${{matrix.os}}
@@ -187,7 +171,7 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@93397bea11091df50f3d7e59dc26a7711a8bcfbe # v4.1.0
       with:
-        go-version: 1.20.X
+        go-version: 1.22.X
     - name: Checkout code
       uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
     - name: Clean
@@ -199,15 +183,6 @@ jobs:
     - name: build
       run: |
         make gitops
-    - name: publish to s3
-      uses: aws-actions/configure-aws-credentials@8c3f20df09ac63af7b3ae3d7c91f105f857d8497 # v4.0.0
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
-    - run: |
-        aws s3 cp bin/gitops s3://weave-gitops/gitops-${{matrix.os}}-${{steps.gitsha.outputs.sha}}
-        aws s3 cp s3://weave-gitops/gitops-${{matrix.os}}-${{steps.gitsha.outputs.sha}} s3://weave-gitops/gitops-${{matrix.os}}
 
   ci-publish-js-lib:
     name: Publish js library
@@ -230,9 +205,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
         with:
-          node-version: "16.X"
+          node-version: "18.X"
           registry-url: "https://npm.pkg.github.com"
-          scope: "@weaveworks"
+          scope: "@volschin"
       - run: yarn
       - run: make ui-lib
       - name: Update package version
@@ -240,7 +215,7 @@ jobs:
         run: |
           GITOPS_VERSION=$(git describe)
           echo "::set-output name=js-version::$GITOPS_VERSION"
-          jq '.version = "'$GITOPS_VERSION'" | .name = "@weaveworks/weave-gitops-main"' < dist/package.json > dist/package-new.json
+          jq '.version = "'$GITOPS_VERSION'" | .name = "@volschin/weave-gitops-main"' < dist/package.json > dist/package-new.json
           mv dist/package-new.json dist/package.json
           cp .npmrc dist
       - run: cd dist && npm publish
@@ -280,7 +255,7 @@ jobs:
         run: |
           curl --fail --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }} \
-            --header 'authorization: Bearer ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}' \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
             --data '{
                 "state":"success",
