@@ -1,4 +1,4 @@
-module github.com/volschin/weave-gitops
+module github.com/weaveworks/weave-gitops
 
 go 1.22
 
