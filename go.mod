@@ -224,7 +224,7 @@ require (
 replace github.com/johannesboyne/gofakes3 => github.com/chanwit/gofakes3 v0.0.0-20220715114300-3f51f1961f7b
 
 // Renaming of weaveworks/tf-controller
-replace github.com/weaveworks/tf-controller/tfctl => github.com/flux-iac/tofu-controller/tfctl v0.16.0-rc.4
+replace github.com/weaveworks/tf-controller/tfctl => github.com/flux-iac/tofu-controller/tfctl v0.0.0-20240618140934-bcf75fa08e25
 
 // Fix for CVE-2022-1996
 // replace k8s.io/kube-openapi => k8s.io/kube-openapi v0.0.0-20220614142933-1062c7ade5f8
