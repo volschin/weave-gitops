@@ -82,7 +82,7 @@ jobs:
 
       - name: Build Changelog
         id: github_release
-        uses: mikepenz/release-changelog-builder-action@713885393e391b4ce984457280aba0d24fbf0c87 # v4.0.0
+        uses: mikepenz/release-changelog-builder-action@32e3c96f29a6532607f638797455e9e98cfc703d # v4.2.2
         with:
           configuration: "${{ github.workspace }}/.github/changelog/changelog_configuration.json"
           ignorePreReleases: true
