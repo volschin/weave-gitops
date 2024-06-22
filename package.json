@@ -1,5 +1,5 @@
 {
-  "name": "@weaveworks/weave-gitops",
+  "name": "@volschin/weave-gitops",
   "version": "0.38.0",
   "description": "Weave GitOps core",
   "targets": {
@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/weaveworks/weave-gitops.git"
+    "url": "git://github.com/volschin/weave-gitops.git"
   },
   "bugs": {
-    "url": "https://github.com/weaveworks/weave-gitops/issues"
+    "url": "https://github.com/volschin/weave-gitops/issues"
   },
-  "homepage": "https://github.com/weaveworks/weave-gitops#readme",
+  "homepage": "https://github.com/volschin/weave-gitops#readme",
   "peerDependencies": {
     "lodash": "^4.17.21",
     "react": "^17.0.2",
