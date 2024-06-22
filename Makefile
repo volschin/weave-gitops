@@ -217,7 +217,7 @@ lib-test: dependencies ## Run the library integration test
 
 ##@ Utilities
 tls-files:
-	@go install filippo.io/mkcert@v1.4.3
+	@go install https://dl.filippo.io/mkcert/latest?for=linux/amd64
 	mkcert localhost
 
 
