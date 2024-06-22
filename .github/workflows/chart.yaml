@@ -34,7 +34,7 @@ jobs:
         id: new-version
         run: |
           NEW_VERSION=$(yq e '.version' charts/gitops-server/Chart.yaml)
-          echo "::set-output name=version::$NEW_VERSION"
+          echo "version=$new_version" >> $GITHUB_OUTPUT
       - name: Find old version
         id: old-version
         run: |
