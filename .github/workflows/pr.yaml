@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read # for actions/checkout to fetch code
+  packages: write
 
 name: PR CI Workflow
 jobs:
