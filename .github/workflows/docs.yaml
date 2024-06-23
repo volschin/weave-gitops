@@ -50,6 +50,7 @@ jobs:
           export DOC_BASE_URL="/$GITHUB_HEAD_REF/"
           export DOC_URL=https://staging.docs.gitops.volschin.github.io
           export STAGING_BUILD=true
+          npx update-browserslist-db@latest
           yarn build
 
       - name: Deploy to GitHub Pages
@@ -111,6 +112,7 @@ jobs:
         run: |
           yarn install
           yarn clear
+          npx update-browserslist-db@latest
           yarn build
 
       - name: Deploy to GitHub Pages
