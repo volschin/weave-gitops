@@ -1,10 +1,10 @@
 # Weave GitOps
 
 ![Test status](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml/badge.svg)
-[![LICENSE](https://img.shields.io/github/license/weaveworks/weave-gitops)](https://github.com/weaveworks/weave-gitops/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/blob/master/LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/graphs/contributors)
 [![Release](https://img.shields.io/github/v/release/weaveworks/weave-gitops?include_prereleases)](https://github.com/weaveworks/weave-gitops/releases/latest)
-[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B19155%2Fgithub.com%2Fvolschin%2Fweave-gitops.svg?type=shield)](https://app.fossa.com/reports/005da7c4-1f10-4889-9432-8b97c2084e41)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B19155%2Fgithub.com%2Fweaveworks%2Fweave-gitops.svg?type=shield)](https://app.fossa.com/reports/005da7c4-1f10-4889-9432-8b97c2084e41)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7820/badge)](https://www.bestpractices.dev/projects/7820)
 
 Weave GitOps is a simple, open source developer platform for people who want cloud native applications but who don't have
