@@ -29,6 +29,9 @@ jobs:
     needs:
       - has-new-flux
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     if: needs.has-new-flux.outputs.version
     steps:
       - name: Checkout
