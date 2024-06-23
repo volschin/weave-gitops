@@ -7,7 +7,7 @@ BUILD_TIME?=$(shell date +'%Y-%m-%d_%T')
 BRANCH?=$(shell which git > /dev/null && git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT?=$(shell which git > /dev/null && git log -n1 --pretty='%h')
 VERSION?=$(shell which git > /dev/null && git describe --always --match "v*")
-FLUX_VERSION=2.0.1
+FLUX_VERSION=2.3.0
 CHART_VERSION=$(shell which yq > /dev/null && yq e '.version' charts/gitops-server/Chart.yaml)
 TIER=oss
 
@@ -55,7 +55,7 @@ TEST_TO_RUN?=./...
 TEST_V?=-v
 ##@ Test
 unit-tests: ## Run unit tests
-	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.1.3
+	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.19.0
 	# This tool doesn't have releases - it also is only a shim
 	@go install sigs.k8s.io/controller-runtime/tools/setup-envtest@latest
 	KUBEBUILDER_ASSETS=$$(setup-envtest use -p path 1.24.2) CGO_ENABLED=0 ginkgo $(TEST_V) -tags unittest $(TEST_TO_RUN)
@@ -217,7 +217,7 @@ lib-test: dependencies ## Run the library integration test
 
 ##@ Utilities
 tls-files:
-	@go install filippo.io/mkcert@v1.4.3
+	@go install https://dl.filippo.io/mkcert/latest?for=linux/amd64
 	mkcert localhost
 
 

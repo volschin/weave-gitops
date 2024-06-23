@@ -43,7 +43,7 @@ require (
 	github.com/spf13/viper v1.16.0
 	github.com/tomwright/dasel v1.22.1
 	github.com/weaveworks/policy-agent/api v1.0.5
-	github.com/weaveworks/tf-controller/tfctl v0.0.0-20231228180612-918cb6250720
+	github.com/weaveworks/tf-controller/tfctl v0.0.0-20240227084131-24518c85af22
 	github.com/yannh/kubeconform v0.5.0
 	go.uber.org/zap v1.26.0
 	golang.org/x/crypto v0.17.0
@@ -217,13 +217,5 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
 )
 
-// Fix for CVE-2022-1996
-// replace k8s.io/kube-openapi => k8s.io/kube-openapi v0.0.0-20220614142933-1062c7ade5f8
-
 // Use patched version that fixed recursive gets, and force delete for buckets
 replace github.com/johannesboyne/gofakes3 => github.com/chanwit/gofakes3 v0.0.0-20220715114300-3f51f1961f7b
-
-// Fix for CVE-2022-1996
-// replace k8s.io/kube-openapi => k8s.io/kube-openapi v0.0.0-20220614142933-1062c7ade5f8
-
-// Use patched version that fixed recursive gets, and force delete for buckets
