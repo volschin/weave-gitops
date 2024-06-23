@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'website/**'
+      - '.github/workflows/docs.yaml'
   push:
     branches:
       - 'main'
     paths:
       - 'website/**'
+      - '.github/workflows/docs.yaml'
   workflow_dispatch:
 
 permissions:
