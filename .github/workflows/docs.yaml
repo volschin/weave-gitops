@@ -50,7 +50,7 @@ jobs:
           yarn install
           yarn clear
           export DOC_BASE_URL="/$GITHUB_HEAD_REF/"
-          export DOC_URL=https://staging.docs.gitops.volschin.github.io
+          export DOC_URL=https://volschin.github.io/weave-gitops/stage
           export STAGING_BUILD=true
           npx update-browserslist-db@latest
           yarn build
@@ -65,10 +65,6 @@ jobs:
         uses: actions/deploy-pages@v4.0.5
         with:
           preview: true
- #         destination: staging.docs.gitops.volschin.github.io/${{ github.head_ref }}
-   #       parent: false
-   #       headers: |-
-   #         cache-control: no-cache
       - id: add-docs-status
         env:
           GITHUB_HEAD_REF: ${{ github.head_ref }}
@@ -78,7 +74,7 @@ jobs:
           {
             "state": "success",
             "context": "Doc site preview",
-            "target_url": "https://staging.docs.gitops.volschin.github.io/$GITHUB_HEAD_REF"
+            "target_url": "https://volschin.github.io/weave-gitops$GITHUB_HEAD_REF"
           }
           EOF
           )
@@ -119,6 +115,7 @@ jobs:
           yarn install
           yarn clear
           npx update-browserslist-db@latest
+          export DOC_URL=https://volschin.github.io/weave-gitops
           yarn build
 
       - name: Upload artifact
@@ -130,7 +127,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: upload-file
         uses: actions/deploy-pages@v4.0.5
-#        with:
-#          path: website/build
- #         destination: production.docs.gitops.volschin.github.io
-  #        parent: false
