@@ -22,7 +22,7 @@ jobs:
       contents: write # for action to git push a tag
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Find release version
@@ -46,7 +46,7 @@ jobs:
       packages: write # needed for GitHub Packages registry access
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
@@ -66,7 +66,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Unshallow
@@ -113,12 +113,14 @@ jobs:
 
   goreleaser:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     needs:
       - publish_npm_package
       - build-and-push-image
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Unshallow
@@ -167,10 +169,14 @@ jobs:
 
   merge-pr:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      pull-requests: write
+      statuses: write
     needs: goreleaser
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       #  'Unlock Release PR Merge' sets 'release' status check state to success to unlock merging the release PR. See ../../doc/incidents/issues-3907 for full context.
