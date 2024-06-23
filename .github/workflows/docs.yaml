@@ -49,8 +49,8 @@ jobs:
         run: |
           yarn install
           yarn clear
-          export DOC_BASE_URL="/$GITHUB_HEAD_REF/"
-          export DOC_URL=https://volschin.github.io/weave-gitops/stage
+          export DOC_BASE_URL="/weave-gitops/$GITHUB_HEAD_REF/"
+          export DOC_URL=https://volschin.github.io
           export STAGING_BUILD=true
           npx update-browserslist-db@latest
           yarn build
@@ -115,6 +115,7 @@ jobs:
           yarn install
           yarn clear
           npx update-browserslist-db@latest
+          export DOC_BASE_URL="/weave-gitops/"
           export DOC_URL=https://volschin.github.io/weave-gitops
           yarn build
 
