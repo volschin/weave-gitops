@@ -10,6 +10,7 @@ on:
 permissions:
   contents: write # for actions/checkout to fetch code
   pull-requests: write # for mikepenz/release-changelog-builder-action to create changelog
+  statuses: write
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.actor }}/wego-app
