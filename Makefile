@@ -7,24 +7,24 @@ BUILD_TIME?=$(shell date +'%Y-%m-%d_%T')
 BRANCH?=$(shell which git > /dev/null && git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT?=$(shell which git > /dev/null && git log -n1 --pretty='%h')
 VERSION?=$(shell which git > /dev/null && git describe --always --match "v*")
-FLUX_VERSION=2.0.1
+FLUX_VERSION=2.3.0
 CHART_VERSION=$(shell which yq > /dev/null && yq e '.version' charts/gitops-server/Chart.yaml)
 TIER=oss
 
 # Go build args
 GOOS=$(shell which go > /dev/null && go env GOOS)
 GOARCH=$(shell which go > /dev/null && go env GOARCH)
-LDFLAGS?=-X github.com/weaveworks/weave-gitops/cmd/gitops/version.Branch=$(BRANCH) \
-				 -X github.com/weaveworks/weave-gitops/cmd/gitops/version.BuildTime=$(BUILD_TIME) \
-				 -X github.com/weaveworks/weave-gitops/cmd/gitops/version.GitCommit=$(GIT_COMMIT) \
-				 -X github.com/weaveworks/weave-gitops/cmd/gitops/version.Version=$(VERSION) \
-				 -X github.com/weaveworks/weave-gitops/pkg/version.FluxVersion=$(FLUX_VERSION) \
-				 -X github.com/weaveworks/weave-gitops/pkg/analytics.Tier=$(TIER) \
-				 -X github.com/weaveworks/weave-gitops/core/server.Branch=$(BRANCH) \
-				 -X github.com/weaveworks/weave-gitops/core/server.Buildtime=$(BUILD_TIME) \
-				 -X github.com/weaveworks/weave-gitops/core/server.GitCommit=$(GIT_COMMIT) \
-				 -X github.com/weaveworks/weave-gitops/core/server.Version=$(VERSION) \
-				 -X github.com/weaveworks/weave-gitops/cmd/gitops/beta/run.HelmChartVersion=$(CHART_VERSION)
+LDFLAGS?=-X github.com/volschin/weave-gitops/cmd/gitops/version.Branch=$(BRANCH) \
+				 -X github.com/volschin/weave-gitops/cmd/gitops/version.BuildTime=$(BUILD_TIME) \
+				 -X github.com/volschin/weave-gitops/cmd/gitops/version.GitCommit=$(GIT_COMMIT) \
+				 -X github.com/volschin/weave-gitops/cmd/gitops/version.Version=$(VERSION) \
+				 -X github.com/volschin/weave-gitops/pkg/version.FluxVersion=$(FLUX_VERSION) \
+				 -X github.com/volschin/weave-gitops/pkg/analytics.Tier=$(TIER) \
+				 -X github.com/volschin/weave-gitops/core/server.Branch=$(BRANCH) \
+				 -X github.com/volschin/weave-gitops/core/server.Buildtime=$(BUILD_TIME) \
+				 -X github.com/volschin/weave-gitops/core/server.GitCommit=$(GIT_COMMIT) \
+				 -X github.com/volschin/weave-gitops/core/server.Version=$(VERSION) \
+				 -X github.com/volschin/weave-gitops/cmd/gitops/beta/run.HelmChartVersion=$(CHART_VERSION)
 
 # Docker args
 # LDFLAGS is passed so we don't have to copy the entire .git directory into the image
@@ -55,7 +55,7 @@ TEST_TO_RUN?=./...
 TEST_V?=-v
 ##@ Test
 unit-tests: ## Run unit tests
-	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.1.3
+	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.19.0
 	# This tool doesn't have releases - it also is only a shim
 	@go install sigs.k8s.io/controller-runtime/tools/setup-envtest@latest
 	KUBEBUILDER_ASSETS=$$(setup-envtest use -p path 1.24.2) CGO_ENABLED=0 ginkgo $(TEST_V) -tags unittest $(TEST_TO_RUN)
@@ -211,13 +211,13 @@ dist/index.d.ts: ui/index.ts
 lib-test: dependencies ## Run the library integration test
 	docker build -t gitops-library-test -f test/library/libtest.dockerfile $(CURRENT_DIR)/test/library
 	docker run -e GITHUB_TOKEN=$$GITHUB_TOKEN -i --rm \
-		-v $(CURRENT_DIR):/go/src/github.com/weaveworks/weave-gitops \
+		-v $(CURRENT_DIR):/go/src/github.com/volschin/weave-gitops \
 		 gitops-library-test
 
 
 ##@ Utilities
 tls-files:
-	@go install filippo.io/mkcert@v1.4.3
+	@go install https://dl.filippo.io/mkcert/latest?for=linux/amd64
 	mkcert localhost
 
 
@@ -233,10 +233,10 @@ download-test-crds:
 	for group_resource in $$group_resources; do \
 		group="$${group_resource%/*}"; resource="$${group_resource#*/}"; \
 		echo "Downloading $${group}.$${resource}"; \
-		curl -sL "https://raw.githubusercontent.com/fluxcd/source-controller/v1.0.0/config/crd/bases/$${group}.toolkit.fluxcd.io_$${resource}.yaml" -o "tools/testcrds/$${group}.toolkit.fluxcd.io_$${resource}.yaml"; \
+		curl -sL "https://raw.githubusercontent.com/fluxcd/source-controller/v1.3.0/config/crd/bases/$${group}.toolkit.fluxcd.io_$${resource}.yaml" -o "tools/testcrds/$${group}.toolkit.fluxcd.io_$${resource}.yaml"; \
 	done
-	curl -sL "https://raw.githubusercontent.com/fluxcd/kustomize-controller/v1.0.0/config/crd/bases/kustomize.toolkit.fluxcd.io_kustomizations.yaml" -o "tools/testcrds/kustomize.toolkit.fluxcd.io_kustomizations.yaml"
-	curl -sL "https://raw.githubusercontent.com/fluxcd/helm-controller/v0.37.0/config/crd/bases/helm.toolkit.fluxcd.io_helmreleases.yaml" -o "tools/testcrds/helm.toolkit.fluxcd.io_helmreleases.yaml"
+	curl -sL "https://raw.githubusercontent.com/fluxcd/kustomize-controller/v1.3.0/config/crd/bases/kustomize.toolkit.fluxcd.io_kustomizations.yaml" -o "tools/testcrds/kustomize.toolkit.fluxcd.io_kustomizations.yaml"
+	curl -sL "https://raw.githubusercontent.com/fluxcd/helm-controller/v1.0.1/config/crd/bases/helm.toolkit.fluxcd.io_helmreleases.yaml" -o "tools/testcrds/helm.toolkit.fluxcd.io_helmreleases.yaml"
 
 .PHONY: help
 # Thanks to https://www.thapaliya.com/en/writings/well-documented-makefiles/

@@ -1,5 +1,5 @@
 {
-  "name": "@weaveworks/weave-gitops",
+  "name": "@volschin/weave-gitops",
   "version": "0.38.0",
   "description": "Weave GitOps core",
   "targets": {
@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/weaveworks/weave-gitops.git"
+    "url": "git://github.com/volschin/weave-gitops.git"
   },
   "bugs": {
-    "url": "https://github.com/weaveworks/weave-gitops/issues"
+    "url": "https://github.com/volschin/weave-gitops/issues"
   },
-  "homepage": "https://github.com/weaveworks/weave-gitops#readme",
+  "homepage": "https://github.com/volschin/weave-gitops#readme",
   "peerDependencies": {
     "lodash": "^4.17.21",
     "react": "^17.0.2",
@@ -50,16 +50,16 @@
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
-    "d3": "^7.6.1",
+    "d3": "^7.9.0",
     "d3-dag": "^0.11.5",
     "history": "^5.0.0",
-    "http-proxy-middleware": "^2.0.3",
-    "jest-canvas-mock": "^2.4.0",
+    "http-proxy-middleware": "^3.0.0",
+    "jest-canvas-mock": "^2.5.2",
     "jest-fail-on-console": "^3.0.1",
     "jest-worker": "^27.5.1",
     "js-sha3": "0.8.0",
     "lodash": "^4.17.21",
-    "luxon": "^3.2.1",
+    "luxon": "^3.4.4",
     "mnemonic-browser": "^0.0.1",
     "postcss": "^8.4.31",
     "query-string": "^4.3.4",
@@ -67,13 +67,13 @@
     "react-dom": "^17.0.2",
     "react-lottie-player": "^1.4.3",
     "react-markdown": "^8.0.7",
-    "react-query": "^3.34.7",
+    "react-query": "^3.39.3",
     "react-router-dom": "^5.2.0",
     "react-syntax-highlighter": "^15.5.0",
-    "react-toastify": "^9.1.2",
+    "react-toastify": "^10.0.4",
     "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.0",
-    "yaml": "^2.2.2"
+    "yaml": "^2.4.5"
   },
   "jest": {
     "preset": "ts-jest",
@@ -92,11 +92,11 @@
     "@parcel/transformer-inline-string": "^2.8.3",
     "@parcel/transformer-typescript-tsc": "^2.8.3",
     "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.7",
+    "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^6.0.0",
     "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.165",
-    "@types/luxon": "^1.26.5",
+    "@types/lodash": "^4.17.5",
+    "@types/luxon": "^3.4.2",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.6",
@@ -115,7 +115,7 @@
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.1.1",
     "typescript": "^5.2.2",
-    "yarn-audit-fix": "^10.0.1"
+    "yarn-audit-fix": "^10.0.7"
   },
   "alias": {
     "yaml": "yaml/browser/dist/index.js"

@@ -1,5 +1,5 @@
 # UI build
-FROM node:16-bullseye AS ui
+FROM node:20-bookworm AS ui
 RUN apt-get update -y && apt-get install -y build-essential
 RUN mkdir -p /home/app && chown -R node:node /home/app
 WORKDIR /home/app
@@ -15,7 +15,7 @@ COPY --chown=node:node ui /home/app/ui
 RUN --mount=type=cache,target=/home/app/ui/.parcel-cache make ui
 
 # Go build
-FROM golang:1.20 AS go-build
+FROM golang:1.22 AS go-build
 
 # Add known_hosts entries for GitHub and GitLab
 RUN mkdir ~/.ssh
@@ -40,7 +40,7 @@ ARG LDFLAGS="-X localbuild=true"
 RUN --mount=type=cache,target=/root/.cache/go-build LDFLAGS=${LDFLAGS##-X localbuild=true} GIT_COMMIT=$GIT_COMMIT make gitops-server
 
 #  Distroless
-FROM gcr.io/distroless/base as runtime
+FROM gcr.io/distroless/base AS runtime
 COPY --from=ui /home/app/bin/dist/ /dist/
 COPY --from=go-build /app/bin/gitops-server /gitops-server
 COPY --from=go-build /root/.ssh/known_hosts /root/.ssh/known_hosts
