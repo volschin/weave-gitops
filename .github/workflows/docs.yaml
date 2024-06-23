@@ -45,7 +45,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
           GITHUB_HEAD_REF: ${{ github.head_ref }}
         run: |
-          yarn install --frozen-lockfile
+          yarn install
           yarn clear
           export DOC_BASE_URL="/$GITHUB_HEAD_REF/"
           export DOC_URL=https://staging.docs.gitops.volschin.github.io
@@ -109,7 +109,7 @@ jobs:
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: |
-          yarn install --frozen-lockfile
+          yarn install
           yarn clear
           yarn build
 
