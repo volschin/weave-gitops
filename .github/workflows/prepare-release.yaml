@@ -8,8 +8,8 @@ on:
         required: true
 
 permissions:
-  contents: read # for actions/checkout to fetch code
-  pull-requests: read # for mikepenz/release-changelog-builder-action to create changelog
+  contents: write # for actions/checkout to fetch code
+  pull-requests: write # for mikepenz/release-changelog-builder-action to create changelog
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.actor }}/wego-app
