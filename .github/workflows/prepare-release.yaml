@@ -12,7 +12,7 @@ permissions:
   pull-requests: read # for mikepenz/release-changelog-builder-action to create changelog
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: volschin/wego-app
+  IMAGE_NAME: ${{ github.actor }}/wego-app
 
 jobs:
   release-tasks:
