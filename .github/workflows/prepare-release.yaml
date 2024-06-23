@@ -12,7 +12,7 @@ permissions:
   pull-requests: read # for mikepenz/release-changelog-builder-action to create changelog
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: weaveworks/wego-app
+  IMAGE_NAME: ${{ github.actor }}/wego-app
 
 jobs:
   release-tasks:
@@ -26,18 +26,18 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
-          go-version: 1.20.X
+          go-version: 1.22.X
       - name: Setup Node.js
-        uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 16.X
+          node-version: 20.X
       - name: Set up environment vars
         run: |
           echo "BRANCH=releases/${{ github.event.inputs.version }}" >> $GITHUB_ENV
           GITOPS_VERSION=$(echo ${{ github.event.inputs.version }} | tr -d v)
           echo "GITOPS_VERSION=$GITOPS_VERSION" >> $GITHUB_ENV
           git config user.name weave-gitops-bot
-          git config user.email weave-gitops-bot@weave.works
+          git config user.email weave-gitops-bot@noreply.github.com
 
       - name: Update npm package version
         run: |
@@ -64,9 +64,6 @@ jobs:
          helm-docs -c charts/gitops-server -o ../../website/docs/references/helm-reference.md
          git commit -am "Update the helm reference" || : # This may not have changed
       - name: Update docs version
-        env:
-          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-          GA_KEY: ${{ secrets.GA_KEY }}
         run: |
           VERSION=${{ github.event.inputs.version }} make bin/gitops
           tools/update-docs.sh ${PWD}/bin/gitops ${PWD}/website
@@ -82,7 +79,7 @@ jobs:
 
       - name: Build Changelog
         id: github_release
-        uses: mikepenz/release-changelog-builder-action@713885393e391b4ce984457280aba0d24fbf0c87 # v4.0.0
+        uses: mikepenz/release-changelog-builder-action@32e3c96f29a6532607f638797455e9e98cfc703d # v4.2.2
         with:
           configuration: "${{ github.workspace }}/.github/changelog/changelog_configuration.json"
           ignorePreReleases: true
@@ -91,11 +88,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
         id: create-pull-request
-        uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5.0.2
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
-          author: weave-gitops-bot <weave-gitops-bot@weave.works>
           signoff: true
-          committer: weave-gitops-bot <weave-gitops-bot@weave.works>
           branch: ${{ env.BRANCH }}
           base: main
           title: "Updates for ${{ env.GITOPS_VERSION }}"
@@ -123,14 +118,14 @@ jobs:
              For Flux migrations to v2.0 see [flux](https://github.com/fluxcd/flux2/releases/tag/v2.0.0) or [weave gitops](https://docs.gitops.weave.works/docs/guides/fluxga-upgrade/) documentation.
             
            ${{ steps.github_release.outputs.changelog }}
-          token: ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           labels: "exclude from release notes"
       #  'Lock Release PR Merge' sets 'release' status check with pending state to avoid accidentally merging the release PR. See ../../doc/incidents/issues-3907 for full context.
       - name: Lock Release PR
         run: |
           curl --fail --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ steps.create-pull-request.outputs.pull-request-head-sha }} \
-            --header 'authorization: Bearer ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}' \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
             --data '{
                 "state":"pending",
@@ -141,7 +136,7 @@ jobs:
         run: |
           curl --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/issues/${{ steps.create-pull-request.outputs.pull-request-number }}/comments \
-            --header 'authorization: Bearer ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}' \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
             --data '{
                 "body": "To change the release notes, edit the pull request description.\n\nAs soon as you approve the PR, the release will start, and will be automatically merged when finished"
