@@ -64,9 +64,6 @@ jobs:
          helm-docs -c charts/gitops-server -o ../../website/docs/references/helm-reference.md
          git commit -am "Update the helm reference" || : # This may not have changed
       - name: Update docs version
-        env:
-          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-          GA_KEY: ${{ secrets.GA_KEY }}
         run: |
           VERSION=${{ github.event.inputs.version }} make bin/gitops
           tools/update-docs.sh ${PWD}/bin/gitops ${PWD}/website
@@ -93,9 +90,7 @@ jobs:
         id: create-pull-request
         uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
-          author: weave-gitops-bot <weave-gitops-bot@weave.works>
           signoff: true
-          committer: weave-gitops-bot <weave-gitops-bot@weave.works>
           branch: ${{ env.BRANCH }}
           base: main
           title: "Updates for ${{ env.GITOPS_VERSION }}"
@@ -130,7 +125,7 @@ jobs:
         run: |
           curl --fail --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/statuses/${{ steps.create-pull-request.outputs.pull-request-head-sha }} \
-            --header 'authorization: Bearer ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}' \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
             --data '{
                 "state":"pending",
@@ -141,7 +136,7 @@ jobs:
         run: |
           curl --request POST \
             --url https://api.github.com/repos/${{ github.repository }}/issues/${{ steps.create-pull-request.outputs.pull-request-number }}/comments \
-            --header 'authorization: Bearer ${{ secrets.WEAVE_GITOPS_BOT_ACCESS_TOKEN }}' \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'content-type: application/json' \
             --data '{
                 "body": "To change the release notes, edit the pull request description.\n\nAs soon as you approve the PR, the release will start, and will be automatically merged when finished"
