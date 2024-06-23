@@ -213,7 +213,8 @@ jobs:
       - name: Update package version
         id: package-version
         run: |
-          GITOPS_VERSION=$(git describe)
+  #        GITOPS_VERSION=$(git describe)
+          GITOPS_VERSION=v0.39.0
           echo "js-version=$GITOPS_VERSION" >> $GITHUB_OUTPUT
           jq '.version = "'$GITOPS_VERSION'" | .name = "@volschin/weave-gitops-main"' < dist/package.json > dist/package-new.json
           mv dist/package-new.json dist/package.json
