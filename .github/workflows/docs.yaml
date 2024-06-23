@@ -52,17 +52,21 @@ jobs:
           export STAGING_BUILD=true
           npx update-browserslist-db@latest
           yarn build
+        
+      - name: Upload artifact
+        id: upload-file
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./website/build
 
       - name: Deploy to GitHub Pages
-        id: upload-file
         uses: actions/deploy-pages@v4.0.5
         with:
           preview: true
-          path: website/build
  #         destination: staging.docs.gitops.volschin.github.io/${{ github.head_ref }}
-          parent: false
-          headers: |-
-            cache-control: no-cache
+   #       parent: false
+   #       headers: |-
+   #         cache-control: no-cache
       - id: add-docs-status
         env:
           GITHUB_HEAD_REF: ${{ github.head_ref }}
@@ -115,10 +119,16 @@ jobs:
           npx update-browserslist-db@latest
           yarn build
 
+      - name: Upload artifact
+        id: uploadprod-file
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./website/build
+
       - name: Deploy to GitHub Pages
         id: upload-file
         uses: actions/deploy-pages@v4.0.5
-        with:
-          path: website/build
+#        with:
+#          path: website/build
  #         destination: production.docs.gitops.volschin.github.io
-          parent: false
+  #        parent: false
