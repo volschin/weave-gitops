@@ -5,13 +5,15 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'doc/**'
+      - 'website/**'
       - '.github/**'
   pull_request:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'doc/**'
+      - 'website/**'
       - '.github/**'
   schedule:
     - cron: '0 12 * * 1'
