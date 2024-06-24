@@ -22,7 +22,7 @@ jobs:
       max-parallel: 1
     steps:
       - name: run-ghrs
-        uses: jgehrcke/github-repo-stats@latest
+        uses: jgehrcke/github-repo-stats
         with:
           repository: ${{ matrix.statsRepo }}
           ghtoken: ${{ secrets.GITHUB_TOKEN }}
