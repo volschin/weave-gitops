@@ -182,10 +182,10 @@ github.com/fluxcd/image-automation-controller/api v0.33.1 h1:yvdNCHDOTpxp/QGj203
 github.com/fluxcd/image-automation-controller/api v0.33.1/go.mod h1:65BqKNpHQ+FfNH79WhmrTgqoetGAEBlr0aRvHLr9oug=
 github.com/fluxcd/image-reflector-controller/api v0.27.2 h1:SqziaPXmF4mmPS5NGCIutRMaqrrUDhHdi0JSLz77gOo=
 github.com/fluxcd/image-reflector-controller/api v0.27.2/go.mod h1:TNn1Y3XuinlCRiohmjUtwvjWurTspPg0U0cCvMI5Q3E=
+github.com/fluxcd/notification-controller/api v1.3.0 h1:e3Plvo44XIKP2pUjwx8U4/fMpPwVM3EvJrYLIIqcVrI=
+github.com/fluxcd/notification-controller/api v1.3.0/go.mod h1:KUaWXACNwWpAYo/Q4mzBjGbsYlUzXdq654jc1XpgMQw=
 github.com/fluxcd/kustomize-controller/api v1.3.0 h1:IwXkU48lQ/YhU6XULlPXDgQlnpNyQdCNbUvhLdWVIbE=
 github.com/fluxcd/kustomize-controller/api v1.3.0/go.mod h1:kg/WM9Uye5NOqGVW/F3jnkjrlgFZHHa84+4lnzOV8fI=
-github.com/fluxcd/notification-controller/api v1.0.0 h1:WiXS116pwhFp7Qe/Fc1GmKCfLBRnZu+rYCeIn07cO+4=
-github.com/fluxcd/notification-controller/api v1.0.0/go.mod h1:uamWZwmhSHE7xdJkgRhH4Eo5/SKKILFI4o+CoQjlczc=
 github.com/fluxcd/pkg/apis/acl v0.3.0 h1:UOrKkBTOJK+OlZX7n8rWt2rdBmDCoTK+f5TY2LcZi8A=
 github.com/fluxcd/pkg/apis/acl v0.3.0/go.mod h1:WVF9XjSMVBZuU+HTTiSebGAWMgM7IYexFLyVWbK9bNY=
 github.com/fluxcd/pkg/apis/kustomize v1.5.0 h1:ah4sfqccnio+/5Edz/tVz6LetFhiBoDzXAElj6fFCzU=
@@ -1160,8 +1160,8 @@ k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340 h1:BZqlfIlq5YbRMFko6/PM7F
 k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340/go.mod h1:yD4MZYeKMBwQKVht279WycxKyM84kkAx2DPrTXaeb98=
 k8s.io/kubectl v0.28.4 h1:gWpUXW/T7aFne+rchYeHkyB8eVDl5UZce8G4X//kjUQ=
 k8s.io/kubectl v0.28.4/go.mod h1:CKOccVx3l+3MmDbkXtIUtibq93nN2hkDR99XDCn7c/c=
-k8s.io/utils v0.0.0-20231127182322-b307cd553661 h1:FepOBzJ0GXm8t0su67ln2wAZjbQ6RxQGZDnzuLcrUTI=
-k8s.io/utils v0.0.0-20231127182322-b307cd553661/go.mod h1:OLgZIPagt7ERELqWJFomSt595RzquPNLL48iOWgYOg0=
+k8s.io/utils v0.0.0-20240310230437-4693a0247e57 h1:gbqbevonBh57eILzModw6mrkbwM0gQBEuevE/AaBsHY=
+k8s.io/utils v0.0.0-20240310230437-4693a0247e57/go.mod h1:OLgZIPagt7ERELqWJFomSt595RzquPNLL48iOWgYOg0=
 rsc.io/binaryregexp v0.2.0/go.mod h1:qTv7/COck+e2FymRvadv62gMdZztPaShugOCi3I+8D8=
 rsc.io/quote/v3 v3.1.0/go.mod h1:yEA65RcK8LyAZtP9Kv3t0HmxON59tX3rD+tICJqUlj0=
 rsc.io/sampler v1.3.0/go.mod h1:T1hPZKmBbMNahiBKFy5HrXp6adAjACjK9JXDnKaTXpA=

@@ -13,8 +13,8 @@ require (
 	github.com/fluxcd/helm-controller/api v0.37.0
 	github.com/fluxcd/image-automation-controller/api v0.33.1
 	github.com/fluxcd/image-reflector-controller/api v0.27.2
+	github.com/fluxcd/notification-controller/api v1.3.0
 	github.com/fluxcd/kustomize-controller/api v1.3.0
-	github.com/fluxcd/notification-controller/api v1.0.0
 	github.com/fluxcd/pkg/apis/meta v1.5.0
 	github.com/fluxcd/pkg/runtime v0.43.2
 	github.com/fluxcd/pkg/ssa v0.35.0
@@ -205,7 +205,7 @@ require (
 	k8s.io/klog/v2 v2.120.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340 // indirect
 	k8s.io/kubectl v0.28.4
-	k8s.io/utils v0.0.0-20231127182322-b307cd553661 // indirect
+	k8s.io/utils v0.0.0-20240310230437-4693a0247e57 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/kustomize/kyaml v0.16.0
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
