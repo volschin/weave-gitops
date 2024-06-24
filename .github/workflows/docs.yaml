@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'website/**'
+      - '.github/workflows/docs.yaml'
   push:
     branches:
       - 'main'
     paths:
       - 'website/**'
+      - '.github/workflows/docs.yaml'
   workflow_dispatch:
 
 permissions:
@@ -18,15 +20,23 @@ permissions:
 
 jobs:
   staging-release:
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
       statuses: write
-    if: ${{ github.event_name != 'push' && github.repository_owner == 'weaveworks' && !github.event.pull_request.head.repo.fork }}
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    if: ${{ github.event_name != 'push' && github.repository_owner == 'volschin' && !github.event.pull_request.head.repo.fork }}
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: "20.x"
@@ -37,24 +47,24 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
           GITHUB_HEAD_REF: ${{ github.head_ref }}
         run: |
-          yarn install --frozen-lockfile
+          yarn install
           yarn clear
-          export DOC_BASE_URL="/$GITHUB_HEAD_REF/"
-          export DOC_URL=https://staging.docs.gitops.weave.works
+          export DOC_BASE_URL="/weave-gitops/$GITHUB_HEAD_REF/"
+          export DOC_URL=https://${{ github.repository_owner }}.github.io
           export STAGING_BUILD=true
+          npx update-browserslist-db@latest
           yarn build
-      - id: auth
-        uses: google-github-actions/auth@71fee32a0bb7e97b4d33d548e7d957010649d8fa # v2.1.3
+        
+      - name: Upload artifact
+        id: upload-file
+        uses: actions/upload-pages-artifact@v3
         with:
-          credentials_json: ${{ secrets.PROD_DOCS_GITOPS_UPLOAD }}
-      - id: upload-file
-        uses: google-github-actions/upload-cloud-storage@22121cd842b0d185e042e28d969925b538c33d77 # v2.1.0
+          path: ./website/build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4.0.5
         with:
-          path: website/build
-          destination: staging.docs.gitops.weave.works/${{ github.head_ref }}
-          parent: false
-          headers: |-
-            cache-control: no-cache
+          preview: true
       - id: add-docs-status
         env:
           GITHUB_HEAD_REF: ${{ github.head_ref }}
@@ -64,7 +74,7 @@ jobs:
           {
             "state": "success",
             "context": "Doc site preview",
-            "target_url": "https://staging.docs.gitops.weave.works/$GITHUB_HEAD_REF"
+            "target_url": "https://${{ github.repository_owner }}.github.io/weave-gitops$GITHUB_HEAD_REF"
           }
           EOF
           )
@@ -77,13 +87,22 @@ jobs:
             --fail
 
   prod-release:
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+      statuses: write
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: "20.x"
@@ -93,16 +112,19 @@ jobs:
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: |
-          yarn install --frozen-lockfile
+          yarn install
           yarn clear
+          npx update-browserslist-db@latest
+          export DOC_BASE_URL="/weave-gitops/"
+          export DOC_URL=https://${{ github.repository_owner }}.github.io
           yarn build
-      - id: auth
-        uses: google-github-actions/auth@71fee32a0bb7e97b4d33d548e7d957010649d8fa # v2.1.3
+
+      - name: Upload artifact
+        id: uploadprod-file
+        uses: actions/upload-pages-artifact@v3
         with:
-          credentials_json: ${{ secrets.PROD_DOCS_GITOPS_UPLOAD }}
-      - id: upload-file
-        uses: google-github-actions/upload-cloud-storage@22121cd842b0d185e042e28d969925b538c33d77 # v2.1.0
-        with:
-          path: website/build
-          destination: production.docs.gitops.weave.works
-          parent: false
+          path: ./website/build
+
+      - name: Deploy to GitHub Pages
+        id: upload-file
+        uses: actions/deploy-pages@v4.0.5

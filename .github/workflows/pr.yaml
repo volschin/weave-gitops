@@ -2,9 +2,18 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'doc/**'
+      - 'website/**'
+      - '.github/**'
+      - '**.md'
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'doc/**'
+      - 'website/**'
+      - '.github/**'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.X]
+        node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4.1.7
       - name: Node modules cache
@@ -55,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [1.22.X]
+        go-version: [1.22]
     steps:
       - uses: actions/checkout@v4.1.7
       - name: Setup Go
@@ -66,6 +75,7 @@ jobs:
         uses: fluxcd/flux2/action@ec141c63c49d31f58bdf3d606909a7fda8ebeb51 # main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      # - run: go mod tidy
       - run: make unit-tests
       # - run: make lib-test
 
@@ -74,8 +84,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [1.22.X]
-        node-version: [20.X]
+        go-version: [1.22]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v4.1.7
       - name: Setup Go
@@ -171,7 +181,7 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
       with:
-        go-version: 1.22.X
+        go-version: 1.22
     - name: Checkout code
       uses: actions/checkout@v4.1.7
     - name: Clean
@@ -205,9 +215,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4.0.2
         with:
-          node-version: "20.X"
+          node-version: 20
           registry-url: "https://npm.pkg.github.com"
-          scope: "@volschin"
+          scope: "@${{ github.repository_owner }}"
       - run: yarn
       - run: make ui-lib
       - name: Update package version
@@ -215,7 +225,7 @@ jobs:
         run: |
           GITOPS_VERSION=v0.39.0-${{ github.event.pull_request.head.sha || github.sha }}
           echo "js-version=$GITOPS_VERSION" >> $GITHUB_OUTPUT
-          jq '.version = "'$GITOPS_VERSION'" | .name = "@volschin/weave-gitops-main"' < dist/package.json > dist/package-new.json
+          jq '.version = "'$GITOPS_VERSION'" | .name = "@${{ github.repository_owner }}/weave-gitops-main"' < dist/package.json > dist/package-new.json
           mv dist/package-new.json dist/package.json
           cp .npmrc dist
       - run: cd dist && npm publish
@@ -237,7 +247,7 @@ jobs:
 
   finish-ci-merge:
     # must match https://github.com/weaveworks/corp/blob/master/github-repo-weave-gitops.tf
-    name: PR CI Pipeline
+    name: Push CI Pipeline
     runs-on: ubuntu-latest
     needs:
       - ci-upload-images

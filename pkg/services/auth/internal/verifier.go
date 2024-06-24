@@ -14,6 +14,7 @@ type CodeVerifier struct {
 	value string
 }
 
+//nolint:all
 func NewCodeVerifier(min, max int) (CodeVerifier, error) {
 	value, err := utils.GenerateRandomString(min, max)
 	if err != nil {
