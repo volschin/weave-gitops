@@ -75,7 +75,7 @@ jobs:
         uses: fluxcd/flux2/action@ec141c63c49d31f58bdf3d606909a7fda8ebeb51 # main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: go mod tidy
+      # - run: go mod tidy
       - run: make unit-tests
       # - run: make lib-test
 
