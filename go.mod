@@ -84,6 +84,7 @@ require (
 	github.com/google/go-github/v52 v52.0.0 // indirect
 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
 	github.com/google/uuid v1.4.0 // indirect
+	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/iancoleman/strcase v0.1.2 // indirect
 	github.com/klauspost/cpuid v1.3.1 // indirect
