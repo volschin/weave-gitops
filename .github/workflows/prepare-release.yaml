@@ -13,7 +13,7 @@ permissions:
   statuses: write
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.actor }}/wego-app
+  IMAGE_NAME: ${{ github.repository_owner }}/wego-app
 
 jobs:
   release-tasks:
