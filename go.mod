@@ -13,7 +13,7 @@ require (
 	github.com/fluxcd/helm-controller/api v0.37.0
 	github.com/fluxcd/image-automation-controller/api v0.33.1
 	github.com/fluxcd/image-reflector-controller/api v0.27.2
-	github.com/fluxcd/kustomize-controller/api v1.0.0
+	github.com/fluxcd/kustomize-controller/api v1.3.0
 	github.com/fluxcd/notification-controller/api v1.0.0
 	github.com/fluxcd/pkg/apis/meta v1.5.0
 	github.com/fluxcd/pkg/runtime v0.43.2
@@ -131,7 +131,7 @@ require (
 	github.com/evanphx/json-patch v5.7.0+incompatible // indirect
 	github.com/exponent-io/jsonpath v0.0.0-20210407135951-1de76d718b3f // indirect
 	github.com/fluxcd/pkg/apis/acl v0.3.0 // indirect
-	github.com/fluxcd/pkg/apis/kustomize v1.2.0 // indirect
+	github.com/fluxcd/pkg/apis/kustomize v1.5.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
