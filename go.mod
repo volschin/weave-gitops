@@ -43,7 +43,7 @@ require (
 	github.com/spf13/viper v1.16.0
 	github.com/tomwright/dasel v1.22.1
 	github.com/weaveworks/policy-agent/api v1.0.5
-	github.com/weaveworks/tf-controller/tfctl v0.0.0-20240227084131-24518c85af22
+	github.com/flux-iac/tofu-controller/tfctl v0.0.0-20240618140934-bcf75fa08e25
 	github.com/yannh/kubeconform v0.5.0
 	go.uber.org/zap v1.26.0
 	golang.org/x/crypto v0.22.0
@@ -102,7 +102,7 @@ require (
 	github.com/shabbyrobe/gocovmerge v0.0.0-20180507124511-f6ea450bfb63 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/skeema/knownhosts v1.2.1 // indirect
-	github.com/weaveworks/tf-controller/api v0.0.0-20231212164812-c222d7f1024a // indirect
+	github.com/flux-iac/tofu-controller/api v0.0.0-20240618140934-bcf75fa08e25 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
