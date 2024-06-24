@@ -14,15 +14,10 @@ jobs:
   j1:
     name: repostats-for-weave-gitops
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        statsRepo:
-        - volschin/weave-gitops
-      fail-fast: false
-      max-parallel: 1
+    
     steps:
       - name: run-ghrs
-        uses: jgehrcke/github-repo-stats@latest
+        uses: jgehrcke/github-repo-stats@main
         with:
-          repository: ${{ matrix.statsRepo }}
+          repository: ${{ github.repository }}
           ghtoken: ${{ secrets.GITHUB_TOKEN }}

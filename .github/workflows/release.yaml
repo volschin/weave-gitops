@@ -10,7 +10,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.actor }}/wego-app
+  IMAGE_NAME: ${{ github.repository_owner }}/wego-app
 
 jobs:
   tag-release:
@@ -22,7 +22,7 @@ jobs:
       contents: write # for action to git push a tag
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Find release version
@@ -46,14 +46,14 @@ jobs:
       packages: write # needed for GitHub Packages registry access
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 20.X"
+          node-version: 20
           registry-url: "https://npm.pkg.github.com"
-          scope: "@${{ github.actor }}"
+          scope: "@${{ github.repository_owner }}"
       - run: yarn
       - run: make ui-lib && cd dist && npm publish
         env:
@@ -63,10 +63,12 @@ jobs:
     needs: tag-release
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      packages: write    
+      id-token: write   # to verify the deployment originates from an appropriate source
+#      statuses: write
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Unshallow
@@ -93,12 +95,15 @@ jobs:
             type=semver,pattern={{version}},value=${{ needs.tag-release.outputs.version }}
           flavor: |
             latest=true
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 # v3.5.0
       - name: setup qemu
         uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 # v3.0.0
       - name: setup docker buildx
         uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
       - name: Build and push Docker image
         uses: docker/build-push-action@31159d49c0d4756269a0940a750801a1ea5d7003 # v6.1.0
+        id: build-and-push
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -110,15 +115,27 @@ jobs:
             FLUX_VERSION=${{ env.FLUX_VERSION }}
             LDFLAGS=${{ env.LDFLAGS }}
             GIT_COMMIT=${{ github.sha }}
+      - name: Sign the images with GitHub OIDC Token
+        env:
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          images=""
+          for tag in ${TAGS}; do
+            images+="${tag}@${DIGEST} "
+          done
+          cosign sign --yes ${images}
 
   goreleaser:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     needs:
       - publish_npm_package
       - build-and-push-image
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Unshallow
@@ -128,11 +145,11 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
-          go-version: 1.22.X
+          go-version: 1.22
       - name: Use Node.js
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 20.X
+          node-version: 20
       - name: Set env var
         env:
           GITHUB_EVENT_PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
@@ -167,10 +184,15 @@ jobs:
 
   merge-pr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      statuses: write
     needs: goreleaser
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       #  'Unlock Release PR Merge' sets 'release' status check state to success to unlock merging the release PR. See ../../doc/incidents/issues-3907 for full context.

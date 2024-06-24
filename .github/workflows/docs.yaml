@@ -36,7 +36,7 @@ jobs:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: "20.x"
@@ -50,7 +50,7 @@ jobs:
           yarn install
           yarn clear
           export DOC_BASE_URL="/weave-gitops/$GITHUB_HEAD_REF/"
-          export DOC_URL=https://volschin.github.io
+          export DOC_URL=https://${{ github.repository_owner }}.github.io
           export STAGING_BUILD=true
           npx update-browserslist-db@latest
           yarn build
@@ -74,7 +74,7 @@ jobs:
           {
             "state": "success",
             "context": "Doc site preview",
-            "target_url": "https://volschin.github.io/weave-gitops$GITHUB_HEAD_REF"
+            "target_url": "https://${{ github.repository_owner }}.github.io/weave-gitops$GITHUB_HEAD_REF"
           }
           EOF
           )
@@ -102,7 +102,7 @@ jobs:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: "20.x"
@@ -116,7 +116,7 @@ jobs:
           yarn clear
           npx update-browserslist-db@latest
           export DOC_BASE_URL="/weave-gitops/"
-          export DOC_URL=https://volschin.github.io
+          export DOC_URL=https://${{ github.repository_owner }}.github.io
           yarn build
 
       - name: Upload artifact

@@ -13,25 +13,25 @@ permissions:
   statuses: write
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.actor }}/wego-app
+  IMAGE_NAME: ${{ github.repository_owner }}/wego-app
 
 jobs:
   release-tasks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
       - name: Setup Go
         uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
-          go-version: 1.22.X
+          go-version: 1.22
       - name: Setup Node.js
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 20.X
+          node-version: 20
       - name: Set up environment vars
         run: |
           echo "BRANCH=releases/${{ github.event.inputs.version }}" >> $GITHUB_ENV
