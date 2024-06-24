@@ -215,7 +215,7 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://npm.pkg.github.com"
-          scope: "@volschin"
+          scope: "@${{ github.repository_owner }}"
       - run: yarn
       - run: make ui-lib
       - name: Update package version
