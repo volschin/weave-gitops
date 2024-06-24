@@ -110,7 +110,7 @@ vet: ## Run go vet against code
 	go vet ./...
 
 lint: ## Run linters against code
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.52.0
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.59.1
 	golangci-lint run --out-format=github-actions --timeout 600s --skip-files "tilt_modules"
 	@go install github.com/yoheimuta/protolint/cmd/protolint@latest
 	protolint lint -config_path=.protolint.yaml ./api
@@ -132,8 +132,8 @@ proto: ## Generate protobuf files
 	  github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
 	  google.golang.org/protobuf/cmd/protoc-gen-go
 	@go install github.com/grpc-ecosystem/protoc-gen-grpc-gateway-ts
-	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0
-	@go install github.com/bufbuild/buf/cmd/buf@v1.1.0
+	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.4.0
+	@go install github.com/bufbuild/buf/cmd/buf@v1.34.0
 	buf generate
 #	This job is complaining about a missing plugin and error-ing out
 #	oapi-codegen -config oapi-codegen.config.yaml api/applications/applications.swagger.json
@@ -141,7 +141,7 @@ proto: ## Generate protobuf files
 # Sometimes we get whitespace differences when running this on linux vs mac
 # So here's how you can do it under linux, on mac
 proto-linux:
-	docker run --rm -v "$(CURRENT_DIR):/app" -w /app golang:1.20 make proto
+	docker run --rm -v "$(CURRENT_DIR):/app" -w /app golang:1.22 make proto
 
 ##@ Docker
 _docker:
