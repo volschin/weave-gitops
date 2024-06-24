@@ -1,6 +1,6 @@
 # Weave GitOps
 
-![Test status](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml/badge.svg)
+[![Test status](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml/badge.svg)](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml)
 [![LICENSE](https://img.shields.io/github/license/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/blob/master/LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/graphs/contributors)
 [![Release](https://img.shields.io/github/v/release/weaveworks/weave-gitops?include_prereleases)](https://github.com/weaveworks/weave-gitops/releases/latest)
