@@ -215,3 +215,6 @@ require (
 
 // Use patched version that fixed recursive gets, and force delete for buckets
 replace github.com/johannesboyne/gofakes3 => github.com/chanwit/gofakes3 v0.0.0-20220715114300-3f51f1961f7b
+
+// new place for tfctl
+replace github.com/weaveworks/tf-controller/tfctl => github.com/flux-iac/tofu-controller/tfctl v0.0.0-20240618140934-bcf75fa08e25
