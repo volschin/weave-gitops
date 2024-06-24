@@ -74,7 +74,7 @@ jobs:
           {
             "state": "success",
             "context": "Doc site preview",
-            "target_url": "https://volschin.github.io/weave-gitops$GITHUB_HEAD_REF"
+            "target_url": "https://${{ github.repository_owner }}.github.io/weave-gitops$GITHUB_HEAD_REF"
           }
           EOF
           )
@@ -116,7 +116,7 @@ jobs:
           yarn clear
           npx update-browserslist-db@latest
           export DOC_BASE_URL="/weave-gitops/"
-          export DOC_URL=https://volschin.github.io
+          export DOC_URL=https://${{ github.repository_owner }}.github.io
           yarn build
 
       - name: Upload artifact
