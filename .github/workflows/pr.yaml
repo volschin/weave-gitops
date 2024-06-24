@@ -3,13 +3,16 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'doc/**'
+      - 'website/**'
       - '.github/**'
   pull_request:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'doc/**'
+      - 'website/**'
+      - '.github/**'
   workflow_dispatch:
 
 permissions:
