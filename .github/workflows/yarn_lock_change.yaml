@@ -1,5 +1,14 @@
 name: Yarn Lock Changes
-on: [pull_request, workflow_dispatch]
+on:
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'website/**'
+      - 'ui/**'
+      - 'package.json'
+      - 'yarn.lock'
+  workflow_dispatch:
 
 jobs:
   yarn_lock_changes:
