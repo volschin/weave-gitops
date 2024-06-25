@@ -30,6 +30,8 @@ jobs:
         node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4.1.7
+      - name: Enable Corepack
+        run: corepack enable
       - name: 🗄️ Node modules cache
         uses: actions/cache@v4.0.2
         id: yarn-cache
