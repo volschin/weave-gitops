@@ -30,19 +30,6 @@ jobs:
         node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4.1.7
-      - run: rm yarn.lock
- #     - name: 🗄️ Node modules cache
- #       uses: actions/cache@v4.0.2
- #       id: yarn-cache
- #       env:
- #         cache-name: cache-node-modules
- #       with:
- #         path: ~/.cache/yarn
- #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
- #         restore-keys: |
- #           ${{ runner.os }}-build-${{ env.cache-name }}-
- #           ${{ runner.os }}-build-
- #           ${{ runner.os }}-
 #      - name: 🌐 Use Node.js ${{ matrix.node-version }}
 #        uses: actions/setup-node@v4.0.2
 #        with:
@@ -50,7 +37,9 @@ jobs:
 #          cache: 'yarn'
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
-    #  - run: corepack use yarn@stable && make node_modules
+        with:
+          cache-prefix: cache-node-modules
+    #  - run: make node_modules
       - name: 📦 Check that package.json & package-lock.json were updated in commit
         run: |
           echo "Using node.js "$(node --version)
