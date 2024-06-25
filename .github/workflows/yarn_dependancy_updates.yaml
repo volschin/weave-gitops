@@ -1,4 +1,4 @@
-name: Update dependencies
+name: Update YARN dependencies
 
 on:
   schedule:
@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: yarn up '*'
+    - run: corepack enable && yarn up '*'
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6.1.0
