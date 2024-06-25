@@ -224,7 +224,12 @@ jobs:
       - run: make ui-lib
       - name: ⛳️ Update package version
         id: package-version
-        run: |
+        uses: proudust/gh-describe@v2
+      - run: |
+          echo "describe  : ${{ steps.package-version.outputs.describe }}"
+          echo "tag       : ${{ steps.package-version.outputs.tag }}"
+          echo "distance  : ${{ steps.package-version.outputs.distance }}"
+          echo "short-sha : ${{ steps.package-version.outputs.short-sha }}"
           GITOPS_VERSION=v0.39.0-${{ github.event.pull_request.head.sha || github.sha }}
           echo "js-version=$GITOPS_VERSION" >> $GITHUB_OUTPUT
           jq '.version = "'$GITOPS_VERSION'" | .name = "@${{ github.repository_owner }}/weave-gitops-main"' < dist/package.json > dist/package-new.json
