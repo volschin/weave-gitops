@@ -32,3 +32,5 @@ gha-creds-*.json
 # macOS
 .DS_Store
 gitops-server.dockerfile
+
+.yarn/cache
