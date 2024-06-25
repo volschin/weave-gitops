@@ -169,7 +169,7 @@ ui: node_modules $(shell find ui -type f) ## Build the UI
 
 node_modules: ## Install node modules
 	rm -rf .parcel-cache
-	yarn config set network-timeout 600000 && yarn --frozen-lockfile
+	yarn config set network-timeout 600000 && yarn install && git diff --no-ext-diff
 
 ui-lint: ## Run linter against the UI
 	yarn lint
