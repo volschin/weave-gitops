@@ -20,12 +20,6 @@
 # Versions:                                                                            #
 #   - 1.2.1 - 25-05-2024 - fix a missing action/cache not upraded to v4                #
 #   - 1.2.0 - 01-05-2024 - action/cache upraded to v4                                  #
-#   - 1.1.0 - 22-07-2023 - Option to enable npm global cache folder.                   #
-#   - 1.0.4 - 15-07-2023 - Fix corepack was always enabled.                            #
-#   - 1.0.3 - 05-07-2023 - YARN_ENABLE_MIRROR to false (speed up cold start)           #
-#   - 1.0.2 - 02-06-2023 - install-state default to false                              #
-#   - 1.0.1 - 29-05-2023 - cache-prefix doc                                            #
-#   - 1.0.0 - 27-05-2023 - new input: cache-prefix                                     #
 ########################################################################################
 
 name: 'Monorepo install (yarn)'
@@ -115,7 +109,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.cwd }}
       #run: yarn install --immutable --inline-builds
-      run: yarn install --inline-builds
+      run: yarn --version && yarn install --inline-builds && git diff
       env:
         # Overrides/align yarnrc.yml options (v3, v4) for a CI context
         YARN_ENABLE_GLOBAL_CACHE: 'false' # Use local cache folder to keep downloaded archives
