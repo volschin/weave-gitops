@@ -122,5 +122,6 @@
   },
   "resolutions": {
     "htmlnano": "2.0.3"
-  }
+  },
+  "packageManager": "yarn@3.8.3"
 }
