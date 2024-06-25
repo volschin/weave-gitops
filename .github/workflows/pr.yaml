@@ -46,6 +46,7 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
       - run: corepack use yarn@stable && make node_modules
