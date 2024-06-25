@@ -90,24 +90,24 @@ jobs:
         node-version: [20]
     steps:
       - uses: actions/checkout@v4.1.7
-      - name: Setup Go
+      - name: 🦍 Setup Go
         uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
           go-version: ${{ matrix.go-version }}
       - run: make check-format
       - run: make lint
       - run: go mod tidy
-      - name: Check that go mod tidy has been run
+      - name: ☑️ Check that go mod tidy has been run
         run: git diff --no-ext-diff --exit-code
       - run: make proto
-      - name: Check that make proto has been run
+      - name: ☑️ Check that make proto has been run
         run: git diff --no-ext-diff --exit-code
       - run: make fakes
-      - name: Check that make fakes has been run
+      - name: ☑️ Check that make fakes has been run
         run: git diff --no-ext-diff --exit-code
 
   ci-generate-tag:
-    name: 🧩 CI Generate Image Tag
+    name: 🎰 CI Generate Image Tag
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.generate-tag.outputs.tag }}
@@ -127,11 +127,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.7
       - uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
-      - name: Set build-time flags
+      - name: 🏴‍☠️ Set build-time flags
         run: |
           echo "LDFLAGS=$(make echo-ldflags)" >> $GITHUB_ENV
           echo "FLUX_VERSION=$(make echo-flux-version)" >> $GITHUB_ENV
-      - name: Build and export
+      - name: 🚛 Build and export
         uses: docker/build-push-action@31159d49c0d4756269a0940a750801a1ea5d7003 # v6.1.0
         with:
           tags: "ghcr.io/${{ github.repository }}/${{ matrix.docker-image }}:${{ needs.ci-generate-tag.outputs.tag }}"
@@ -172,7 +172,7 @@ jobs:
           path: /tmp
       
   ci-upload-binary:
-    name: Upload Binary
+    name: ⬆️ Upload Binary
     runs-on: ${{matrix.os}}
     needs: [ci-go, ci-static, ci-js, ci-build-gitops-image]
     strategy:
@@ -206,7 +206,7 @@ jobs:
     outputs:
       js-version: ${{ steps.package-version.outputs.js-version }}
     steps:
-      - name: Checkout
+      - name: ⏳ Checkout
         uses: actions/checkout@v4.1.7
         with:
           # avoid the merge commit that on.pull_request creates
@@ -222,7 +222,7 @@ jobs:
           scope: "@${{ github.repository_owner }}"
       - run: yarn
       - run: make ui-lib
-      - name: Update package version
+      - name: ⛳️ Update package version
         id: package-version
         run: |
           GITOPS_VERSION=v0.39.0-${{ github.event.pull_request.head.sha || github.sha }}
