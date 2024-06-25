@@ -30,20 +30,18 @@ jobs:
         node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4.1.7
-#      - name: Enable Corepack
-#        run: corepack enable
-      - name: 🗄️ Node modules cache
-        uses: actions/cache@v4.0.2
-        id: yarn-cache
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+ #     - name: 🗄️ Node modules cache
+ #       uses: actions/cache@v4.0.2
+ #       id: yarn-cache
+ #       env:
+ #         cache-name: cache-node-modules
+ #       with:
+ #         path: ~/.cache/yarn
+ #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+ #         restore-keys: |
+ #           ${{ runner.os }}-build-${{ env.cache-name }}-
+ #           ${{ runner.os }}-build-
+ #           ${{ runner.os }}-
 #      - name: 🌐 Use Node.js ${{ matrix.node-version }}
 #        uses: actions/setup-node@v4.0.2
 #        with:
