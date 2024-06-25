@@ -30,11 +30,11 @@ jobs:
         node-version: [20, 22]
     steps:
       - uses: actions/checkout@v4.1.7
-#      - name: 🌐 Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v4.0.2
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#          cache: 'yarn'
+      - name: 🌐 Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
