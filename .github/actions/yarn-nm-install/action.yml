@@ -67,7 +67,7 @@ runs:
       env:
         YARN_ENABLE_GLOBAL_CACHE: 'false'
       run: |
-        echo "CACHE_FOLDER='~/.cache/yarn'" >> $GITHUB_OUTPUT
+        echo "CACHE_FOLDER=~/.cache/yarn" >> $GITHUB_OUTPUT
         echo "CURRENT_NODE_VERSION="node-$(node --version)"" >> $GITHUB_OUTPUT
         echo "CURRENT_BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's,/,-,g')" >> $GITHUB_OUTPUT
         echo "NPM_GLOBAL_CACHE_FOLDER=$(npm config get cache)" >> $GITHUB_OUTPUT
@@ -81,13 +81,13 @@ runs:
 #          yarn-download-cache-${{ inputs.cache-prefix }}-
       env:
         cache-name: ${{ inputs.cache-prefix }}
-        with:
-          path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+      with:
+        path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
 
     - name: ♻️ Restore node_modules
       if: inputs.cache-node-modules == 'true'
