@@ -48,7 +48,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
-      - run: make node_modules
+      - run: corepack use yarn@stable && make node_modules
       - name: 📦 Check that package.json & package-lock.json were updated in commit
         run: |
           echo "Using node.js "$(node --version)
