@@ -125,6 +125,18 @@ jobs:
             images+="${tag}@${DIGEST} "
           done
           cosign sign --yes ${images}
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@0.23.0
+        with:
+          image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:@sha256:${{ steps.build-and-push.outputs.digest }}'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
 
   goreleaser:
     runs-on: ubuntu-latest
