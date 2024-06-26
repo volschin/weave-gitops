@@ -61,10 +61,10 @@ runs:
       run: corepack enable
 
     - name: 🌐 Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4.0.2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+      uses: actions/setup-node@v4.0.2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
 
     - name: ⚙️ Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
