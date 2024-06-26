@@ -10,6 +10,7 @@ COPY --chown=node:node Makefile /home/app/
 COPY --chown=node:node tsconfig.json /home/app/
 COPY --chown=node:node .parcelrc /home/app/
 COPY --chown=node:node .npmrc /home/app/
+COPY --chown=node:node .yarnrc.yml /home/app/
 RUN corepack enable && make node_modules
 COPY --chown=node:node ui /home/app/ui
 RUN --mount=type=cache,target=/home/app/ui/.parcel-cache make ui
