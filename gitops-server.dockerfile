@@ -1,5 +1,5 @@
 # UI build
-FROM node:20-bookworm AS ui
+FROM node:22-bookworm AS ui
 RUN apt-get update -qy && apt-get install -qqy build-essential
 RUN corepack enable
 RUN mkdir -p /home/app && chown -R node:node /home/app
