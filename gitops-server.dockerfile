@@ -14,7 +14,7 @@ COPY --chown=node:node .npmrc /home/app/
 COPY --chown=node:node .yarnrc.yml /home/app/
 RUN rm -rf .parcel-cache && yarn install --immutable --inline-builds
 COPY --chown=node:node ui /home/app/ui
-RUN yarn add update-browserslist-db
+RUN yarn dlx update-browserslist-db
 RUN --mount=type=cache,target=/home/app/ui/.parcel-cache make ui
 
 # Go build
