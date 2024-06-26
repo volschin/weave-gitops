@@ -165,6 +165,7 @@ docker-gitops-bucket-server: _docker ## Build a Docker image of the Gitops UI Se
 ##@ UI
 # Build the UI for embedding
 ui: node_modules $(shell find ui -type f) ## Build the UI
+        yarn dlx update-browserslist-db
 	yarn build
 
 node_modules: ## Install node modules
