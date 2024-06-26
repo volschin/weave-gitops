@@ -55,7 +55,7 @@ TEST_TO_RUN?=./...
 TEST_V?=-v
 ##@ Test
 unit-tests: ## Run unit tests
-	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.17.1
+	@go install github.com/onsi/ginkgo/v2/ginkgo@v2.19.0
 	# This tool doesn't have releases - it also is only a shim
 	@go install sigs.k8s.io/controller-runtime/tools/setup-envtest@latest
 	KUBEBUILDER_ASSETS=$$(setup-envtest use -p path 1.28.x) CGO_ENABLED=0 ginkgo $(TEST_V) -tags unittest $(TEST_TO_RUN)
