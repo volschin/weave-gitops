@@ -188,7 +188,7 @@ ui-test: ## Run UI tests
 	yarn test
 
 ui-audit: ## Run audit against the UI
-	yarn npm audit --production
+	yarn npm audit --environment production --recursive
 
 ui-audit-fix: ## Fix UI audit errors
 	yarn yarn-audit-fix
