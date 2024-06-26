@@ -1,6 +1,6 @@
 # UI build
 FROM node:20-bookworm AS ui
-RUN apt-get update -y && apt-get install -y build-essential
+RUN apt-get update -qy && apt-get install -qqy build-essential
 RUN corepack enable
 RUN mkdir -p /home/app && chown -R node:node /home/app
 WORKDIR /home/app
@@ -12,7 +12,7 @@ COPY --chown=node:node tsconfig.json /home/app/
 COPY --chown=node:node .parcelrc /home/app/
 COPY --chown=node:node .npmrc /home/app/
 COPY --chown=node:node .yarnrc.yml /home/app/
-RUN rm -rf .parcel-cache && yarn install --immutable --environment production --inline-builds
+RUN rm -rf .parcel-cache && yarn install --immutable --inline-builds
 COPY --chown=node:node ui /home/app/ui
 RUN --mount=type=cache,target=/home/app/ui/.parcel-cache make ui
 
