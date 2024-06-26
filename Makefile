@@ -169,8 +169,7 @@ ui: node_modules $(shell find ui -type f) ## Build the UI
 
 node_modules: ## Install node modules
 	rm -rf .parcel-cache
-	yarn config set network-timeout 600000 && yarn install --refresh-lockfile && git diff --no-ext-diff
-# run: yarn install --immutable --inline-builds
+	yarn install --immutable --inline-builds
 ui-lint: ## Run linter against the UI
 	yarn lint
 	yarn typecheck
