@@ -2694,26 +2694,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react-hooks@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@testing-library/react-hooks@npm:6.0.0"
+"@testing-library/react-hooks@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@testing-library/react-hooks@npm:8.0.1"
   dependencies:
     "@babel/runtime": ^7.12.5
-    "@types/react": ">=16.9.0"
-    "@types/react-dom": ">=16.9.0"
-    "@types/react-test-renderer": ">=16.9.0"
-    filter-console: ^0.1.1
     react-error-boundary: ^3.1.0
   peerDependencies:
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-    react-test-renderer: ">=16.9.0"
+    "@types/react": ^16.9.0 || ^17.0.0
+    react: ^16.9.0 || ^17.0.0
+    react-dom: ^16.9.0 || ^17.0.0
+    react-test-renderer: ^16.9.0 || ^17.0.0
   peerDependenciesMeta:
+    "@types/react":
+      optional: true
     react-dom:
       optional: true
     react-test-renderer:
       optional: true
-  checksum: 31460e61f56bccc9d2b8413a786b6ef4f62867b4e9e93fb954d25a7623a03fb7bdde180dac97c37e41487216a8dd7d169e1b18266a37af1b5b62ea84e0bea5a1
+  checksum: 7fe44352e920deb5cb1876f80d64e48615232072c9d5382f1e0284b3aab46bb1c659a040b774c45cdf084a5257b8fe463f7e08695ad8480d8a15635d4d3d1f6d
   languageName: node
   linkType: hard
 
@@ -2991,7 +2990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:>=16.9.0, @types/react-dom@npm:^17.0.5":
+"@types/react-dom@npm:^17.0.5":
   version: 17.0.25
   resolution: "@types/react-dom@npm:17.0.25"
   dependencies:
@@ -3021,15 +3020,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-test-renderer@npm:>=16.9.0":
-  version: 17.0.1
-  resolution: "@types/react-test-renderer@npm:17.0.1"
-  dependencies:
-    "@types/react": "*"
-  checksum: ecaae8df36cd8cfeb89080d52534856acc3789bad9a6e369ff5119426377c827b4e5b5daa638507f2c1c2fd6c994bf45de288a698143178cd4049c2cd8b77b35
-  languageName: node
-  linkType: hard
-
 "@types/react-transition-group@npm:^4.2.0":
   version: 4.4.4
   resolution: "@types/react-transition-group@npm:4.4.4"
@@ -3039,7 +3029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16.9.0, @types/react@npm:^17.0.6":
+"@types/react@npm:*, @types/react@npm:^17.0.6":
   version: 17.0.38
   resolution: "@types/react@npm:17.0.38"
   dependencies:
@@ -3341,7 +3331,7 @@ __metadata:
     "@parcel/transformer-typescript-tsc": ^2.8.3
     "@testing-library/jest-dom": ^5.12.0
     "@testing-library/react": ^16.0.0
-    "@testing-library/react-hooks": ^6.0.0
+    "@testing-library/react-hooks": ^8.0.1
     "@types/jest": ^27.0.2
     "@types/lodash": ^4.17.5
     "@types/luxon": ^3.4.2
@@ -5697,13 +5687,6 @@ __metadata:
   dependencies:
     to-regex-range: ^5.0.1
   checksum: b4abfbca3839a3d55e4ae5ec62e131e2e356bf4859ce8480c64c4876100f4df292a63e5bb1618e1d7460282ca2b305653064f01654474aa35c68000980f17798
-  languageName: node
-  linkType: hard
-
-"filter-console@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "filter-console@npm:0.1.1"
-  checksum: 020a6aee2b0b7f0e7fdff76b2b86429a7cfc0fd2bae131a8d0d6eaddad05ffbeac16e3267f382a2beaead9568d6b90f2aba923daeb8dd0c97720d8eba885ede2
   languageName: node
   linkType: hard
 
