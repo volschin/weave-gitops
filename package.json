@@ -87,7 +87,7 @@
     "testEnvironment": "jsdom"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.8.3",
+    "@parcel/config-default": "^2.12.0",
     "@parcel/optimizer-data-url": "^2.12.0",
     "@parcel/transformer-inline-string": "^2.8.3",
     "@parcel/transformer-typescript-tsc": "^2.8.3",
