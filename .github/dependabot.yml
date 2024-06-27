@@ -4,7 +4,14 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      material:
+        patterns:
+          - "@material-ui*"
+      react:
+        patterns:
+          - "react*"
 
   # Maintain dependencies for backend
   - package-ecosystem: "gomod"
