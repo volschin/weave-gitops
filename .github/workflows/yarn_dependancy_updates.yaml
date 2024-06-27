@@ -2,7 +2,7 @@ name: Update YARN dependencies
 
 on:
   schedule:
-  - cron: '0 2 * * *'
+  - cron: '0 7 * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,14 +11,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - run: corepack enable && yarn up '*'
+    - run: corepack enable && yarn up --caret '*'
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6.1.0
       with:
         commit-message: Update yarn dependencies
         branch: automatic_dependency_updates_${{ github.run_number }}
-        title: Update all dependencies (#${{ github.run_number }})
+        title: Update yarn dependencies (#${{ github.run_number }})
         body: An updated update of all NPM dependencies and yarn.lock.
         #labels: auto-merge
         #reviewers: # optional
