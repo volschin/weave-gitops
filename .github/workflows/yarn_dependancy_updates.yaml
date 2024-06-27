@@ -11,7 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - run: corepack enable && yarn up --caret '*'
+    #- run: corepack enable && yarn up --caret '*'
+    - run: corepack enable && yarn version check
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6.1.0
