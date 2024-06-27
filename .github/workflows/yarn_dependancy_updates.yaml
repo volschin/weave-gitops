@@ -16,9 +16,9 @@ jobs:
     - name: Create pull request
       uses: peter-evans/create-pull-request@v6.1.0
       with:
-        commit-message: Update all dependencies
+        commit-message: Update yarn dependencies
         branch: automatic_dependency_updates_${{ github.run_number }}
         title: Update all dependencies (#${{ github.run_number }})
-        body: An updated update of all NPM dependencies.
+        body: An updated update of all NPM dependencies and yarn.lock.
         #labels: auto-merge
         #reviewers: # optional
