@@ -28,7 +28,7 @@ By default all policies in the specified path would be deployed in order to spec
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources: # specifies the path to each required policy 
+resources: # specifies the path to each required policy
   - policies/ControllerContainerAllowingPrivilegeEscalation/policy.yaml
   - policies/ControllerContainerRunningAsRoot/policy.yaml
   - policies/ControllerReadOnlyFileSystem/policy.yaml
@@ -130,10 +130,10 @@ To make use of this policy set in the profile:
 
 ```yaml
 policy-agent:
-  config: 
+  config:
     admission:
       policySet: admission-policy-set # name of policy set to be used for admission
-    audit: 
+    audit:
       policySet: audit-policy-set # name of policy set to be used for audit
 ```
 
@@ -291,5 +291,5 @@ status: string # Violation or Compliance
 message: string # message that summarizes the policy validation
 type: string # Admission or Audit
 trigger: string # what triggered the validation, create request or initial audit,..
-created_at: string # time that the validation occurred in 
+created_at: string # time that the validation occurred in
 ```

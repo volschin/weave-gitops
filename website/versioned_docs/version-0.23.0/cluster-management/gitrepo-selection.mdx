@@ -6,7 +6,7 @@ import TierLabel from "../_components/TierLabel";
 
 # Git Repositories and Resources <TierLabel tiers="Enterprise" />
 
-During the pull request creation, to authenticate using Git, you will need to select the git repository where the pull request will be created.  
+During the pull request creation, to authenticate using Git, you will need to select the git repository where the pull request will be created.
 
 ## The default git repository selected in the UI
 
@@ -26,7 +26,7 @@ Depending on the action performed on the resource (creation/deletion/editing), t
       weave.works/repo-role: default
   ```
 
-3. the flux-system repository 
+3. the flux-system repository
   ```yaml
   metadata:
     name: flux-system
@@ -43,7 +43,7 @@ In the case of tenants, its recommended the `weave.works/repo-role: default` is 
 
 The system will try and automatically calculate the correct HTTPS API endpoint to create a Pull Request against. For example, if the git repository URL is `ssh://git@github.com/org/repo.git`, the system will try and convert it to `https://github.com/org/repo.git`.
 
-However it is not always possible to accurately derive this URL. An override can be specified to set the correct URL instead. For example the ssh url may be `ssh://git@interal-ssh-server:2222/org/repo.git` and the correct HTTPS url may be `https://gitlab.example.com/org/repo.git`. 
+However it is not always possible to accurately derive this URL. An override can be specified to set the correct URL instead. For example the ssh url may be `ssh://git@interal-ssh-server:2222/org/repo.git` and the correct HTTPS url may be `https://gitlab.example.com/org/repo.git`.
 
 In this case we set the override via the `weave.works/repo-https-url` annotation on the `GitRepository` object:
 

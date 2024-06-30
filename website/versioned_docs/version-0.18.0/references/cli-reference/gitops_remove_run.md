@@ -47,4 +47,3 @@ gitops remove run -n dev --all-sessions
 ### SEE ALSO
 
 * [gitops remove](gitops_remove.md)	 - Remove various components of Weave GitOps
-

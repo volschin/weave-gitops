@@ -18,7 +18,7 @@ gitops create dashboard [flags]
 gitops create dashboard ww-gitops \
   --password=$PASSWORD \
   --export > ./clusters/my-cluster/weave-gitops-dashboard.yaml
-		
+
 ```
 
 ### Options
@@ -44,4 +44,3 @@ gitops create dashboard ww-gitops \
 ### SEE ALSO
 
 * [gitops create](gitops_create.md)	 - Creates a resource
-

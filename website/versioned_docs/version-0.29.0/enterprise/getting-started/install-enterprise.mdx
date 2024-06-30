@@ -58,7 +58,7 @@ After having configured kubectl, deploy the CAPA components by following the [st
 
 ### 2. Prepare IAM for Installation
 
-Cluster API needs special permissions in AWS. Use the `clusterawsadm` command below to roll out a CloudStack and install the permissions into your AWS account. Although the CloudStack is bound to a region, the resulting permissions are globally scoped. You can use any AWS Region that you have access to. 
+Cluster API needs special permissions in AWS. Use the `clusterawsadm` command below to roll out a CloudStack and install the permissions into your AWS account. Although the CloudStack is bound to a region, the resulting permissions are globally scoped. You can use any AWS Region that you have access to.
 
 The `clusterawsadm` command takes an AWSIAMConfiguration file. [Cluster API docs provide the command](https://cluster-api-aws.sigs.k8s.io/topics/using-clusterawsadm-to-fulfill-prerequisites.html#with-eks-support) for you; run this.
 
@@ -68,7 +68,7 @@ Run the `clusterawsadm` command to create an IAM group:
 clusterawsadm bootstrap iam create-cloudformation-stack --config eks-config.yaml --region $REGION
 ```
 
-Create an IAM User, which will be used as a kind of service account, and assign the newly created group to this user. The group name will be something like: `cluster-api-provider-aws-s-AWSIAMGroupBootstrapper-XXXX`. 
+Create an IAM User, which will be used as a kind of service account, and assign the newly created group to this user. The group name will be something like: `cluster-api-provider-aws-s-AWSIAMGroupBootstrapper-XXXX`.
 
 Create a secret for the newly created IAM user.
 
@@ -126,7 +126,7 @@ flux bootstrap gitlab \
 </TabItem>
 </Tabs>
 
-Your private GitHub repo should have a clusters/management folder that includes the manifests Flux needs to operate, and that also generates a key value pair for Flux to access the repo. 
+Your private GitHub repo should have a clusters/management folder that includes the manifests Flux needs to operate, and that also generates a key value pair for Flux to access the repo.
 
 * **owner**: The username (or organization) of the Git repository
 * **repository**: Git repository name
@@ -254,7 +254,7 @@ If BitBucket Server is running on the default port (7990), make sure you include
 
 <TabItem value="azure-devops" label="Azure DevOps">
 
-Navigate to [VisualStudio](https://app.vsaex.visualstudio.com/app/register) and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`. 
+Navigate to [VisualStudio](https://app.vsaex.visualstudio.com/app/register) and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`.
 
 Select the `Code (read and write)` scope from the list. This is necessary so that WGE can create pull requests on behalf of users. An example of configuring these settings is shown below.
 

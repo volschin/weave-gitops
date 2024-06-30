@@ -15,8 +15,8 @@ This document defines security reporting, handling, disclosure, and audit inform
 
 - To make a report please email the private security list at <security@weave.works> with the details.
   We ask that reporters act in good faith by not disclosing the issue to others.
-- Reported vulnerabilities are triaged by Weaveworks Security team.   
-- Weaveworks Security team would acknowledge to the reporter for any valid request.  
+- Reported vulnerabilities are triaged by Weaveworks Security team.
+- Weaveworks Security team would acknowledge to the reporter for any valid request.
   You will be able to choose if you want public acknowledgement of your effort and how you would like to be credited.
 
 ### Handling
@@ -30,7 +30,7 @@ This document defines security reporting, handling, disclosure, and audit inform
 ### Disclosures
 
 Vulnerability disclosures announced publicly.
-Disclosures will contain an overview, details about the vulnerability, a fix that will typically be an update, 
+Disclosures will contain an overview, details about the vulnerability, a fix that will typically be an update,
 and optionally a workaround if one is available.
 
 We will coordinate publishing disclosures and security releases in a way that is realistic and necessary for end users.
@@ -43,14 +43,13 @@ Here is an overview of all our published security advisories.
 
 ### Weave Gitops OSS
 
-Date | CVE | Security Advisory                                                                                                                                                   | Severity | Affected version(s) | 
----- | -- |----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------| ------------------- | 
-2022-06-23 | [CVE-2022-31098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31098)| [Weave GitOps leaked cluster credentials into logs on connection errors](https://github.com/advisories/GHSA-xggc-qprg-x6mw) | Critical  | <= 0.8.1-rc.5| 
+Date | CVE | Security Advisory                                                                                                                                                   | Severity | Affected version(s) |
+---- | -- |----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------| ------------------- |
+2022-06-23 | [CVE-2022-31098](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31098)| [Weave GitOps leaked cluster credentials into logs on connection errors](https://github.com/advisories/GHSA-xggc-qprg-x6mw) | Critical  | <= 0.8.1-rc.5|
 
 
 ### Weave Gitops Enterprise
 
-Date | CVE | Security Advisory                                                                                                                                                   | Severity | Affected version(s) | 
----- | -- |----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------| ------------------- | 
+Date | CVE | Security Advisory                                                                                                                                                   | Severity | Affected version(s) |
+---- | -- |----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------| ------------------- |
 2022-08-27 | [CVE-2022-38790](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-38790) | [Malicious links can be crafted by users and shown in the UI](cve/enterprise/CVE-2022-38790) | Critical  | < v0.9.0-rc.5|
-

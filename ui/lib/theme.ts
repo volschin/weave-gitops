@@ -160,7 +160,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
   }
-  
+
   body {
     font-family: ${(props) => props.theme.fontFamilies.regular};
     font-size: ${(props) => props.theme.fontSizes.medium};
@@ -168,7 +168,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     min-width: fit-content;
-    background: right bottom no-repeat fixed; 
+    background: right bottom no-repeat fixed;
     background-image: ${(props) =>
       props.theme.mode === ThemeTypes.Dark
         ? `url(${images.bgDark})`
@@ -185,7 +185,7 @@ export const GlobalStyle = createGlobalStyle`
 
 //prevents white autofill background in dark mode
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
     ${(props) =>
       props.theme.mode === ThemeTypes.Dark &&

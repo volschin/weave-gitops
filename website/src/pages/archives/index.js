@@ -7,7 +7,7 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
 
   return (
-    <Layout 
+    <Layout
       title={`${siteConfig.title}`}
       description={`${siteConfig.tagline}`}>
       <main class="container container--fluid margin-vert--lg">
@@ -20,7 +20,7 @@ export default function Home() {
                 </article>
             </div>
         </div>
-        
+
       </main>
     </Layout>
   );

@@ -27,7 +27,7 @@ gitops check oidc-config --claim-username=sub
 
 # Check configuration without fetching a Secret from the cluster
 gitops check oidc-config --skip-secret --client-id=CID --client-secret=SEC --issuer-url=https://example.org
-		
+
 ```
 
 ### Options
@@ -60,4 +60,3 @@ gitops check oidc-config --skip-secret --client-id=CID --client-secret=SEC --iss
 ### SEE ALSO
 
 * [gitops check](gitops_check.md)	 - Validates flux compatibility
-

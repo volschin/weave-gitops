@@ -22,4 +22,3 @@ jobs:
           token: ${{ secrets.WKS_CI_TEST_BOT_PR_TOKEN }}
           repository: weaveworks/weave-gitops-enterprise
           event-type: create-pr
-

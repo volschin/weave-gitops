@@ -29,7 +29,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
+
     if: ${{ github.event_name != 'push' && github.repository_owner == 'volschin' && !github.event.pull_request.head.repo.fork }}
     runs-on: ubuntu-latest
     defaults:
@@ -54,7 +54,7 @@ jobs:
           export STAGING_BUILD=true
           npx update-browserslist-db@latest
           yarn build
-        
+
       - name: Upload artifact
         id: upload-file
         uses: actions/upload-pages-artifact@v3

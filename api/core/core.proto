@@ -388,9 +388,9 @@ message ListObjectsRequest {
     map<string, string> labels = 4;
 }
 
-message ClusterNamespaceList { 
+message ClusterNamespaceList {
     string clusterName = 1;
-    repeated string namespaces = 2; 
+    repeated string namespaces = 2;
 }
 
 message ListObjectsResponse {

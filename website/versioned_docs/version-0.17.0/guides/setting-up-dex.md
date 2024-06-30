@@ -15,7 +15,7 @@ This example uses [Dex][tool-dex] and its GitHub connector, and assumes Weave Gi
 ## What is Dex?
 
 [Dex][tool-dex] is an identity service that uses [OpenID Connect][oidc] to
-drive authentication for other apps.  
+drive authentication for other apps.
 
 Alternative solutions for identity and access management exist such as [Keycloak](https://www.keycloak.org/).
 
@@ -81,7 +81,7 @@ spec:
   chart:
     spec:
       chart: dex
-      version: 0.6.5 
+      version: 0.6.5
       sourceRef:
         kind: HelmRepository
         name: dex

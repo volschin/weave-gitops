@@ -36,7 +36,7 @@ metadata:
 spec:
   interval: 5m0s
   url: https://stefanprodan.github.io/podinfo
-```  
+```
 
 This will ensure that all charts in the `HelmRepository` are identified as Profiles.
 
@@ -142,7 +142,7 @@ When creating a cluster from the UI using a CAPI template, these Profiles are av
 
 As shown above, some Profiles are optional, while others are required. This is determined when the template is authored and allows for operations teams to control which Helm packages should be installed on new clusters by default.
 
-To enable editing of the yaml values for required Profiles, add the `editable` flag in the annotation and describe the required Profile in the template. For example: 
+To enable editing of the yaml values for required Profiles, add the `editable` flag in the annotation and describe the required Profile in the template. For example:
 
 ```
 apiVersion: templates.weave.works/v1alpha2

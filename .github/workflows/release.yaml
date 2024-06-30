@@ -63,7 +63,7 @@ jobs:
     needs: tag-release
     runs-on: ubuntu-latest
     permissions:
-      packages: write    
+      packages: write
       id-token: write   # to verify the deployment originates from an appropriate source
 #      statuses: write
     steps:

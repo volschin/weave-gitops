@@ -6,11 +6,11 @@ This package provides a wrapper of the command line interface to execute Flux co
 
 ## How to add new flags
 
-Add the new type `Option` struct to the `options.go` of `fluxexec` package. 
+Add the new type `Option` struct to the `options.go` of `fluxexec` package.
 Then create a function to represent it.
 
 The below example shows how to add the `--export` flag.
-We have `ExportOption` struct to whole the value of the `--export` flag, 
+We have `ExportOption` struct to whole the value of the `--export` flag,
 and we have `Export` function to represent this flag during the command creation.
 
 ```go
