@@ -2,7 +2,7 @@ name: Update YARN dependencies
 
 on:
   schedule:
-  - cron: '0 7 * * *'
+  - cron: '0 7 * * 2'
   workflow_dispatch:
 
 jobs:
