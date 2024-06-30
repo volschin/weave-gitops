@@ -29,7 +29,7 @@ resources:
 ```
 
 :::info
-Enterprise customers should have access to fork policy library repo into their local repositories. 
+Enterprise customers should have access to fork policy library repo into their local repositories.
 :::
 
 ## Install agent on management cluster
@@ -41,7 +41,7 @@ The agent comes packaged with the WGE chart. To install it you need to set the f
 - `values.policy-agent.clusterId`: unique identifier for the cluster
 
 ## Install Policy Profile
-To install the policy profile on a cluster, you should select the `weave-policy-agent` from the profiles dropdown in the `Create Cluster` page. 
+To install the policy profile on a cluster, you should select the `weave-policy-agent` from the profiles dropdown in the `Create Cluster` page.
 
 ![Policy Profile](./img/weave-policy-profile.png)
 
@@ -72,7 +72,7 @@ Now let's try to deploy a Kubernetes deployment that violates one of the enforce
 Once you apply it, the policy agent will deny this request and show a violation message.
 
 ## Violations Logs in UI
-You can view all the violation log in Weave GitOps UI to view all connected clusters policy violations, and where you can dive into the details of each violation. 
+You can view all the violation log in Weave GitOps UI to view all connected clusters policy violations, and where you can dive into the details of each violation.
 
 <strong>Violations Log</strong>
 

@@ -476,7 +476,7 @@ This is second line
         size="medium"
       >
         label
-        : 
+        :
         label
       </span>
       <span
@@ -484,7 +484,7 @@ This is second line
         size="medium"
       >
         goose
-        : 
+        :
         goose
       </span>
     </div>

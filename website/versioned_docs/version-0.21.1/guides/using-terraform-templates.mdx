@@ -76,7 +76,7 @@ flux reconcile kustomization flux-system
 ### 2. Use the template to create a resource
 A resource can be created from a template by specifying the template's name and supplying values to it, as well as your Weave GitOps Enterprise username, password, and HTTP API endpoint.
 ```bash
-gitops add terraform --from-template sample-wge-tf-controller-template \ 
+gitops add terraform --from-template sample-wge-tf-controller-template \
 --set="RESOURCE_NAME"="name" \
 --username=<username> --password=<password> \
 --endpoint https://localhost:8000 \

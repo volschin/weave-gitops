@@ -93,7 +93,7 @@ spec:
   url: https://weaveworks.github.io/weave-gitops-profile-examples/
 ```
 
-To be able to use private repositories with restricted access, a secret can be used and synced to the target leaf cluster using [SecretSync](../secrets/bootstraping-secrets.mdx). 
+To be able to use private repositories with restricted access, a secret can be used and synced to the target leaf cluster using [SecretSync](../secrets/bootstraping-secrets.mdx).
 
 The secret is referenced in the SecretSync as `spec.secretRef` and the labels of the target leaf cluster are added for the syncer to match clusters against those labels using  `spec.clusterSelector.matchLabels`.
 ```yaml title="SecretSync.yaml"
@@ -136,7 +136,7 @@ When creating a cluster from the UI using a CAPI template, these profiles should
 
 As shown above, some profiles will be optional whereas some profiles will be required. This is determined when the template is authored and allows for operation teams to control which Helm packages should be installed on new clusters by default.
 
-To allow editing of the yaml values for required profiles, the `editable` flag can be added in the annotation describing the required profile in the template. For example: 
+To allow editing of the yaml values for required profiles, the `editable` flag can be added in the annotation describing the required profile in the template. For example:
 
 ```
 apiVersion: templates.weave.works/v1alpha2

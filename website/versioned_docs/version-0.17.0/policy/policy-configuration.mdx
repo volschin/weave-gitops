@@ -18,9 +18,9 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
 - Match by namespaces
 
   ```yaml
-  apiVersion: pac.weave.works/v2beta2 
-  kind: PolicyConfig      # policy config resource kind 
-  metadata:       
+  apiVersion: pac.weave.works/v2beta2
+  kind: PolicyConfig      # policy config resource kind
+  metadata:
     name: my-config       # policy config name
   spec:
     match:                # matches (targets of the policy config)
@@ -28,7 +28,7 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
       - dev
       - prod
     config:               # config for policies [one or more]
-      weave.policies.containers-minimum-replica-count:   
+      weave.policies.containers-minimum-replica-count:
         parameters:
           replica_count: 3
   ```
@@ -36,9 +36,9 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
 - Match by apps
 
   ```yaml
-  apiVersion: pac.weave.works/v2beta2 
-  kind: PolicyConfig   # policy config resource kind 
-  metadata:       
+  apiVersion: pac.weave.works/v2beta2
+  kind: PolicyConfig   # policy config resource kind
+  metadata:
     name: my-config    # policy config name
   spec:
     match:             # matches (targets of the policy config)
@@ -47,7 +47,7 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
         name: my-app            # app name
         namespace: flux-system  # app namespace [if empty will match in any namespace]
     config:            # config for policies [one or more]
-      weave.policies.containers-minimum-replica-count:   
+      weave.policies.containers-minimum-replica-count:
         parameters:
           replica_count: 3
   ```
@@ -55,18 +55,18 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
 - Match by resources
 
   ```yaml
-  apiVersion: pac.weave.works/v2beta2 
-  kind: PolicyConfig   # policy config resource kind 
-  metadata:       
+  apiVersion: pac.weave.works/v2beta2
+  kind: PolicyConfig   # policy config resource kind
+  metadata:
     name: my-config    # policy config name
   spec:
     match:             # matches (targets of the policy config)
       resources:       # add one or more resources [Deployment, ReplicaSet, ..]
-      - kind: Deployment          
+      - kind: Deployment
         name: my-deployment     # resource name
         namespace: default      # resource namespace [if empty will match in any namespace]
     config:            # config for policies [one or more]
-      weave.policies.containers-minimum-replica-count:   
+      weave.policies.containers-minimum-replica-count:
         parameters:
           replica_count: 3
   ```
@@ -79,7 +79,7 @@ A new `PolicyConfig` CRD allows using policies with multiple configurations by c
 - Policy config which targets a kubernetes resource in all namespaces.
 - Policy config which targets a kubernetes resource in a specific namespace.
 
-**Note**: 
+**Note**:
 - All configs are applied from low priority to high priority as well as common parameters between configs.
 - Each config only affects the parameters defined in it.
 
@@ -165,9 +165,9 @@ spec:
 
 **In the previous example when you apply the 5 configurations**
 
-- `app-a` will be affected by `my-config-5`. It will be applied on the policies defined in it, which will affect deployment `deployment-1` in namespace `flux-system` as it matches the kind, name and namespace. 
+- `app-a` will be affected by `my-config-5`. It will be applied on the policies defined in it, which will affect deployment `deployment-1` in namespace `flux-system` as it matches the kind, name and namespace.
 
-**Note**: 
+**Note**:
 Deploying `deployment-1` in another namespace other than `flux-system` won't be affected by this configuration
 
   Final config values will be as the following:
@@ -255,7 +255,7 @@ Deploying `app-a` in another namespace other than `flux-system` won't be affecte
   - <em>Also it will be affected by `my-config-1` for `owner` configuration parameter `owner: owner-1`</em>
 
 
-**Note** 
+**Note**
 
 - You can use one or more policies as the following example
 

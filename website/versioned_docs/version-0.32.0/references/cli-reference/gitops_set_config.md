@@ -34,4 +34,3 @@ gitops set config analytics true
 ### SEE ALSO
 
 * [gitops set](gitops_set.md)	 - Sets one or many Weave GitOps CLI configs or resources
-

@@ -7,12 +7,12 @@ import {useLocation} from '@docusaurus/router';
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);
-  
+
 const VersionItems = () => {
   const {search, hash} = useLocation();
   const activeDocContext = useActiveDocContext('default');
   const versions = useVersions('default');
-  
+
   const versionLinks = versions.filter(function(version) {
     if (version.isLast || version.label === "Next") { // omit current and lastVersion from the list
       return false; // skip
@@ -36,7 +36,7 @@ const VersionItems = () => {
     {versionLinks.map(data => (
             <li><a href={data.to}>{data.label}</a></li>
         ))}
-    </ul>   
+    </ul>
   );
 }
 

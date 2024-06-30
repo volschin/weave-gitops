@@ -80,4 +80,3 @@ gitops beta run ./charts/podinfo --timeout 3m --port-forward namespace=flux-syst
 ### SEE ALSO
 
 * [gitops beta](gitops_beta.md)	 - This component contains unstable or still-in-development functionality
-

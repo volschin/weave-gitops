@@ -88,7 +88,7 @@ annotations:
 The Provider address can then be set as `https://promotions.example.org/pipeline-01/my-app/dev`.
 
 :::tip
-You may also use the [generic webhook provider type that supports HMAC verification](https://fluxcd.io/flux/components/notification/provider/#generic-webhook-with-hmac) to ensure incoming notifications originate from authenticated sources. 
+You may also use the [generic webhook provider type that supports HMAC verification](https://fluxcd.io/flux/components/notification/provider/#generic-webhook-with-hmac) to ensure incoming notifications originate from authenticated sources.
 :::
 
 The `address` field's URL path is comprised of 3 components again:
@@ -122,7 +122,7 @@ spec:
 Be aware to create the Provider/Alert tuple on each of the leaf clusters targeted by a pipeline.
 :::
 
-Now as soon as the `HelmRelease` on the first environment defined in the pipeline is bumped (e.g. by Flux discovering a new version in the Helm repository), an event is sent to the promotion webhook which will determine the next action based on the pipeline definition and chosen strategy. The rest of this guide describes how to setup up any of the available strategies depending on your requirements. 
+Now as soon as the `HelmRelease` on the first environment defined in the pipeline is bumped (e.g. by Flux discovering a new version in the Helm repository), an event is sent to the promotion webhook which will determine the next action based on the pipeline definition and chosen strategy. The rest of this guide describes how to setup up any of the available strategies depending on your requirements.
 
 ## Pull request
 
@@ -211,7 +211,7 @@ Weave GitOps Enterprise will look for this marker whenever it receives an event 
 
 This section explains how to configure pipelines to work with external CI systems that are responsible for application promotions.
 
-This strategy uses the notification controller running on the management cluster, to forward any notifications received by the promotion webhook, from leaf clusters to external CI systems. This requires to [patch](https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-notifications-for-third-party-controllers) the Flux manifests of the management cluster, in order to allow objects of type `Pipeline` to be used as event sources. An example of a patch applied to enable this is shown below: 
+This strategy uses the notification controller running on the management cluster, to forward any notifications received by the promotion webhook, from leaf clusters to external CI systems. This requires to [patch](https://fluxcd.io/flux/cheatsheets/bootstrap/#enable-notifications-for-third-party-controllers) the Flux manifests of the management cluster, in order to allow objects of type `Pipeline` to be used as event sources. An example of a patch applied to enable this is shown below:
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -229,7 +229,7 @@ patches:
     name:  alerts.notification.toolkit.fluxcd.io
 ```
 
-You can now create Provider/Alert resources on the management cluster to forward notifications to external systems. For example, the Provider resource shown below is used to invoke a GitHub Actions workflow on a repository: 
+You can now create Provider/Alert resources on the management cluster to forward notifications to external systems. For example, the Provider resource shown below is used to invoke a GitHub Actions workflow on a repository:
 ```yaml
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider

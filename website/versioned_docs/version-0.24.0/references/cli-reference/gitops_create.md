@@ -18,7 +18,7 @@ gitops create terraform my-resource \
   --path ./terraform \
   --interval 1m \
   --export > ./clusters/my-cluster/infra/terraform-my-resource.yaml
-		
+
 ```
 
 ### Options

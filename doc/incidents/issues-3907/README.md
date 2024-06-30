@@ -1,11 +1,11 @@
-# Release v0.29 published helm chart before container image was available causing upgrade failures in users  
+# Release v0.29 published helm chart before container image was available causing upgrade failures in users
 
 Tracking issue: https://github.com/weaveworks/weave-gitops/issues/3907
 
-## Summary  
+## Summary
 
-Wednesday, August 2nd, we released Weave Gitops v0.29 as part of our regular release cadence. The release published 
-artefacts out of order causing degradation in users environments. For example, as stated in the [issue](https://github.com/weaveworks/weave-gitops/issues/3907), 
+Wednesday, August 2nd, we released Weave Gitops v0.29 as part of our regular release cadence. The release published
+artefacts out of order causing degradation in users environments. For example, as stated in the [issue](https://github.com/weaveworks/weave-gitops/issues/3907),
 the Helm chart was published before the container image was available:
 
 ```
@@ -13,10 +13,10 @@ weave-gitops-648b7f9655-ll4zn   0/1     ImagePullBackOff   0          11m
 weave-gitops-648b7f9655-ll4zn   0/1     ErrImagePull       0          11m
 ```
 
-It was caused by the release PR being merged before the release workflows had finished. It recovered when the release workflow finished 
-and the container image was published. 
+It was caused by the release PR being merged before the release workflows had finished. It recovered when the release workflow finished
+and the container image was published.
 
-## Root Cause Analysis 
+## Root Cause Analysis
 
 Releasing is stated in [release process](https://github.com/weaveworks/weave-gitops/blob/main/doc/release-process.md) that
 requires two steps and workflows:
@@ -31,16 +31,16 @@ Looking at process and workflows, at least these two paths could cause the failu
 ### Release PR merged before Release job finishes
 
 Release PR has two expected interactions:
-- Release PR is approved by Releaser flagging the release job to start. 
-- Release PR is merged by Release Bot after the release job has completed. 
+- Release PR is approved by Releaser flagging the release job to start.
+- Release PR is merged by Release Bot after the release job has completed.
 
 What the release process does not avoid, is Releaser accidentally merging the PR after approving and before the
-release job has finished. 
+release job has finished.
 
-This is the scenario that we found ourselves in the latest release [v0.29](https://github.com/weaveworks/weave-gitops/pull/3906). 
-The merge triggered the [chart workflow](https://github.com/weaveworks/weave-gitops/blob/main/.github/workflows/chart.yaml) 
+This is the scenario that we found ourselves in the latest release [v0.29](https://github.com/weaveworks/weave-gitops/pull/3906).
+The merge triggered the [chart workflow](https://github.com/weaveworks/weave-gitops/blob/main/.github/workflows/chart.yaml)
 that [released v4.0.27 chart](https://github.com/weaveworks/weave-gitops/actions/runs/5738131386/job/15551116775). This chart
-expected [container image tag v0.29.0](https://github.com/weaveworks/weave-gitops/pull/3906/files#diff-67081178cf02ff87b1326e8b608a6ab4e49a85606346d64607b498fead04b048R13). 
+expected [container image tag v0.29.0](https://github.com/weaveworks/weave-gitops/pull/3906/files#diff-67081178cf02ff87b1326e8b608a6ab4e49a85606346d64607b498fead04b048R13).
 
 This happened at around `2023-08-02T11:16` (UTC is the timezone used here).
 
@@ -69,7 +69,7 @@ First time we were notified of impact was at 11.26 UTC:
 
 ![first-time-noticed.png](imgs/first-time-noticed.png)
 
-The container image tag v0.29.0 [started building](https://github.com/weaveworks/weave-gitops/actions/runs/5738127454) at `2023-08-02T11:29`: 
+The container image tag v0.29.0 [started building](https://github.com/weaveworks/weave-gitops/actions/runs/5738127454) at `2023-08-02T11:29`:
 
 ```
 2023-08-02T11:29:24.0894265Z ##[group]Run docker/build-push-action@v3
@@ -99,54 +99,54 @@ And ended up at around `2023-08-02T12:41`:
 20
 ```
 
-Any upgrade to v0.29.0 from `2023-08-02T11:16` to `2023-08-02T12:41` ended up in failure. 
+Any upgrade to v0.29.0 from `2023-08-02T11:16` to `2023-08-02T12:41` ended up in failure.
 
-Given the evidence, we could say with a degree of certainty that this was the cause of the incident. The rest of the document focuses on understanding 
-remediation actions and next steps. Release job steps ordering will be evaluated as separate issue. 
+Given the evidence, we could say with a degree of certainty that this was the cause of the incident. The rest of the document focuses on understanding
+remediation actions and next steps. Release job steps ordering will be evaluated as separate issue.
 
-## Resolution 
+## Resolution
 
 It was resolved after the release workflow ended and the container image was published.
 
 ## Prevention
 
-Given that a Releaser just needs to verify the release looks fine before triggered. We should design the process 
-taking that into consideration. Two alternatives are identified: 
+Given that a Releaser just needs to verify the release looks fine before triggered. We should design the process
+taking that into consideration. Two alternatives are identified:
 
 1. no human intervention has effect, or is possible, after a release PR is approved
 2. no human intervention is required during the release process
 
 From the two approaches, we will be giving priority to the first one, so the second would require changing the process that we could anticipate would
-be more costly (more changes to do) and riskier (adopt new process and changes could end up in different new failure modes). 
-The second alternative would be discovered in case there is no feasible solution from 1), or there is no appetite to go ahead with that. 
+be more costly (more changes to do) and riskier (adopt new process and changes could end up in different new failure modes).
+The second alternative would be discovered in case there is no feasible solution from 1), or there is no appetite to go ahead with that.
 
 ### No human intervention has effect or not possible after release PR is approved
-The scenario we want to model would be something like 
+The scenario we want to model would be something like
 
 ```gherkin
-Feature: release with out of order guardrails  
+Feature: release with out of order guardrails
 
-  Scenario: 
+  Scenario:
     Given releaser executed prepare-release job with `v0.30`
-    Then release PR is created 
+    Then release PR is created
     And release PR cannot be merged cause not approved
     And release PR cannot be merged cause not released
-    
+
     When releaser approves it
     Then release workflow starts
     And release PR cannot be merged as not yet release workflow ended
-    
+
     When release workflow ends
-    Then release PR is merged by release bot 
+    Then release PR is merged by release bot
 ```
-A solution to achieve the semantics that only `approved and released` release PRs could be merged, could be achieved 
-by extending our current `branch merge protection`: 
+A solution to achieve the semantics that only `approved and released` release PRs could be merged, could be achieved
+by extending our current `branch merge protection`:
 
 Protection against merging unapproved PRs is already in place.
 
 ![weave-gitops-protection-approval.png](imgs/weave-gitops-protection-approval.png)
 
-Protection against merging not-released PRs is not in place:  
+Protection against merging not-released PRs is not in place:
 
 ![weave-gitops-protection-status-checks.png](imgs/weave-gitops-protection-status-checks.png)
 
@@ -155,17 +155,17 @@ and requiring a `release` status check to merge PRs:
 
 ![main-protection.png](imgs/main-protection.png)
 
-A `release` status checks would have locking semantics as follows: 
-- Do nothing if the PR is not from a release branch. 
+A `release` status checks would have locking semantics as follows:
+- Do nothing if the PR is not from a release branch.
 - if release branch
   - `lock`: at prepare-release workflow.
   - `unlock`: after release has been done (and container image has been published).
 
-Therefore, an attempt to merge a release PR would be blocked until the release does not happen. 
+Therefore, an attempt to merge a release PR would be blocked until the release does not happen.
 
 The `release` status check could be managed via github api and gitihub actions steps like:
 
-```yaml 
+```yaml
   release:
     if: ${{ !startsWith(github.event.pull_request.head.ref, 'releases/') }}
     runs-on: ubuntu-latest
@@ -183,17 +183,17 @@ The `release` status check could be managed via github api and gitihub actions s
               }'
 ```
 
-### Proof of Concept Validation 
+### Proof of Concept Validation
 
-#### Non-Release Branch Scenario 
+#### Non-Release Branch Scenario
 
 ```gherkin
 Feature: can build non-release branches without changing the flow nor overhead
-  Background: 
+  Background:
     Given weave-gitops main merges are protected with `build` status check
     And weave-gitops main merges are protected with `release` status check
-    
-  Scenario: current flow  
+
+  Scenario: current flow
     Given a non release pr
     When build
     Then CI workflow  passes
@@ -202,7 +202,7 @@ Feature: can build non-release branches without changing the flow nor overhead
 
 
 ```
-  Background: 
+  Background:
     Given weave-gitops main merges are protected with `build` status check
     And weave-gitops main merges are protected with `release` status check
 
@@ -213,7 +213,7 @@ Feature: can build non-release branches without changing the flow nor overhead
 ```
    Given a non release pr
     When build
- 
+
 ```
 Created branch called `feature/validation-poc` and Bot raised PR https://github.com/enekofb/weave-gitops/pull/6
 
@@ -240,7 +240,7 @@ Feature: can build release branches with guardrails
 
   Scenario: add a check to the PR that only gets passed when release goes on
     When human executed prepare-release job with `v0.30`
-    Then release PR is created 
+    Then release PR is created
     And release PR cannot be merged cause not approved
     And release PR cannot be merged cause not release build passes
 
@@ -248,7 +248,7 @@ Feature: can build release branches with guardrails
     Then release process starts
     And cannot merge it cause release hasnt happened
 
-    When release process ends 
+    When release process ends
     Then release check passes
     And release branch is merged by bot
 ```
@@ -262,7 +262,7 @@ Feature: can build release branches with guardrails
 https://github.com/enekofb/weave-gitops/actions/runs/5806576714
 
 ```
-    Then release PR is created 
+    Then release PR is created
     And release PR cannot be merged cause not approved
     And release PR cannot be merged cause not release build passes
 ```
@@ -279,18 +279,18 @@ We could see how `release Pending — execute release to pass`
     And cannot merge it cause release hasnt happened
 ```
 
-Release has started https://github.com/enekofb/weave-gitops/actions/runs/5806793749/job/15740396733 
+Release has started https://github.com/enekofb/weave-gitops/actions/runs/5806793749/job/15740396733
 
-And cannot merge it 
+And cannot merge it
 
 ![validate-release-pr-approved.png](imgs/validate-release-pr-approved.png)
 
 ```
-    When release process ends 
+    When release process ends
     Then release check passes
     And release branch is merged by bot
 ```
-After the release happened, the PR got merged by the bot 
+After the release happened, the PR got merged by the bot
 
 ![validate-release-pr-happened.png](imgs/validate-release-pr-happened.png)
 
@@ -303,6 +303,6 @@ https://github.com/enekofb/weave-gitops/actions/runs/5806793749/job/15740396733
 }
 ```
 
-## Known Limitations 
+## Known Limitations
 
-- Failure handling for the approach 
+- Failure handling for the approach

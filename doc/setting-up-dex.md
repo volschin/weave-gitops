@@ -2,7 +2,7 @@
 
 ## Pre-requisites
 
-- A Kubernetes cluster such as [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) cluster running a 
+- A Kubernetes cluster such as [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) cluster running a
 [Flux-supported version of Kubernetes](https://fluxcd.io/docs/installation/#prerequisites)
 - Weave GitOps is [installed](../installation/overview.mdx) and [TLS has been enabled](../configuration/tls.md).
 
@@ -139,7 +139,7 @@ spec:
   chart:
     spec:
       chart: dex
-      version: 0.6.5 
+      version: 0.6.5
       sourceRef:
         kind: HelmRepository
         name: dex

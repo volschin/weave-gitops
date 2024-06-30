@@ -38,7 +38,7 @@ Set up a Git client for your private repo. For GitHub, see their docs on [settin
 
 ### 1. Set up a Management Cluster with `flux`
 
-These steps reflect [Flux](https://fluxcd.io/flux/)’s architecture and operations. 
+These steps reflect [Flux](https://fluxcd.io/flux/)’s architecture and operations.
 
 To get you started, we'll cover:
 
@@ -75,7 +75,7 @@ kind create cluster --config kind-config.yaml --image=kindest/node:v1.23.6
 
 ##### 1.1 Prepare IAM for installation
 
-Cluster API needs special permissions in AWS. Use the `clusterawsadm` command below to roll out a CloudStack and install the permissions into your AWS account. Although the CloudStack is bound to a region, the resulting permissions are globally scoped. You can use any AWS Region that you have access to. 
+Cluster API needs special permissions in AWS. Use the `clusterawsadm` command below to roll out a CloudStack and install the permissions into your AWS account. Although the CloudStack is bound to a region, the resulting permissions are globally scoped. You can use any AWS Region that you have access to.
 
 The `clusterawsadm` command takes an AWSIAMConfiguration file. We have provided a working example for you:
 
@@ -165,7 +165,7 @@ Your private GitHub repo should have a clusters/management folder that includes 
 * **path**       - Path relative to the repository root; when specified, the cluster sync will be scoped to this path
 * **personal**   - If set, the owner is assumed to be a repo user
 
-Go [here](https://fluxcd.io/docs/cmd/) for more information about `flux` and the `flux bootstrap` command. 
+Go [here](https://fluxcd.io/docs/cmd/) for more information about `flux` and the `flux bootstrap` command.
 
 :::note At this point your Flux management cluster should be running. Take a look at the repository you created earlier.
 :::
@@ -302,7 +302,7 @@ If BitBucket Server is running on the default port (7990), make sure you include
 </TabItem>
 <TabItem value="azure-devops" label="Azure DevOps">
 
-Navigate to https://app.vsaex.visualstudio.com/app/register and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`. 
+Navigate to https://app.vsaex.visualstudio.com/app/register and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`.
 
 Select the `Code (read and write)` scope from the list. This is necessary so that WGE can create pull requests on behalf of users. An example of configuring these settings is shown below.
 

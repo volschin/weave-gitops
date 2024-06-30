@@ -6,33 +6,33 @@ hide_title: true
 import TierLabel from "../_components/TierLabel";
 
 # Why GitOps templates <TierLabel tiers="enterprise" />
-GitOpsTemplates enables Application Developers to self-service components and services using Weave GitOps. 
+GitOpsTemplates enables Application Developers to self-service components and services using Weave GitOps.
 Turning knowledge into a library that can be self-served.
- 
+
 ## What are GitOps templates?
-GitOps templates allows you to template resources in a single definition. Resources in a template can be anything that can be expressed in yaml (K8s, Flux primitives, TF controller, Crossplane, Cluster API). 
+GitOps templates allows you to template resources in a single definition. Resources in a template can be anything that can be expressed in yaml (K8s, Flux primitives, TF controller, Crossplane, Cluster API).
 
 
 **FAQ**
 
 **What are GitOps templates?**
-GitOps templates allow you to template resources in a single definition. Resources in a template can be anything that can be expressed in yaml (K8s, Flux primitives, TF controller, Crossplane, Cluster API). 
-Templates are simple YAML files, that can be enriched with Parameters, Variables, Metadata and conditions. They can be rendered to create the resources they contain. For clusters it can be CAPI objects like MachinePool. It can be as well Kustomization (flux) or a TF controller resource. 
+GitOps templates allow you to template resources in a single definition. Resources in a template can be anything that can be expressed in yaml (K8s, Flux primitives, TF controller, Crossplane, Cluster API).
+Templates are simple YAML files, that can be enriched with Parameters, Variables, Metadata and conditions. They can be rendered to create the resources they contain. For clusters it can be CAPI objects like MachinePool. It can be as well Kustomization (flux) or a TF controller resource.
 
 **Ok, what are the restrictions on GitOps templates?**
 
-Basically, the only restriction is that the template needs to be valid YAML. Besides that a rendered template can create any kind of resource. 
+Basically, the only restriction is that the template needs to be valid YAML. Besides that a rendered template can create any kind of resource.
 
 **How do they fit today into Weave GitOps?**
 
-We have added some metadata markup, which helps us to render the template nicely in the GUI. 
+We have added some metadata markup, which helps us to render the template nicely in the GUI.
 
 The template consumer will be only provided with the required Parameters/Inputs and the guardrails, the template gets rendered and we create a PR. Merging the PR will create all the templated resources.
 
 **How can I use GitOps templates?**
 
 GitOps Templates were originally introduced enabling self-service in the cluster creation flow.  We quickly extended that to terraform, crossplane and Kubernetes resources like RBAC (Roles + Rolebindings).
-You can have for example a template that provides a running Developer Environment, consisting in a EKS cluster, a RDS Database, and a branch + revision of the current application through a single template. 
+You can have for example a template that provides a running Developer Environment, consisting in a EKS cluster, a RDS Database, and a branch + revision of the current application through a single template.
 
 ## Organizing Templates
 
@@ -238,9 +238,9 @@ Supported templating languages:
 
   - **templating**
 
-    templating uses text/templating for rendering, using go-templating style syntax `{{ .params.CLUSTER_NAME }}` where params are provided by the `.params` variable. 
-    Template functions can also be used with the syntax `{{ .params.CLUSTER_NAME | FUNCTION }}`. 
-    
+    templating uses text/templating for rendering, using go-templating style syntax `{{ .params.CLUSTER_NAME }}` where params are provided by the `.params` variable.
+    Template functions can also be used with the syntax `{{ .params.CLUSTER_NAME | FUNCTION }}`.
+
     #### Supported functions [(from Sprig library)](http://masterminds.github.io/sprig/)
 
     | __Function Type__                   | __Functions__                                                     |
@@ -303,7 +303,7 @@ The default delimiters for `renderType: templating` are `{{` and `}}`. These can
 - `templates.weave.works/delimiters: "${{,}}"`
   - Use `${{` and `}}`, for example `${{ .params.CLUSTER_NAME }}`
   - Useful as `{{` in yaml is invalid syntax and needs to be quoted. If you need to provide a un-quoted number value like `replicas: 3` you should use these delimiters.
-  - :x: `replicas: {{ .params.REPLICAS }}` Invalid yaml 
+  - :x: `replicas: {{ .params.REPLICAS }}` Invalid yaml
   - :x: `replicas: "{{ .params.REPLICAS }}"` Valid yaml, incorrect type. The type is a `string` not a `number` and will fail validation.
   - :white_check_mark: `replicas: ${{ .params.REPLICAS }}` Valid yaml and correct `number` type.
 - `templates.weave.works/delimiters: "<<,>>" `
@@ -325,7 +325,7 @@ The `templates.weave.works/inject-prune-annotation: "true"` annotation can be us
 enable and disable the injection of Flux's `prune` annotation into certain resources.
 
 When enabled we automatically inject a `kustomize.toolkit.fluxcd.io/prune: disabled`
-annotation into every resource in the `spec.resourcetemplates` that is not a 
+annotation into every resource in the `spec.resourcetemplates` that is not a
 `cluster.x-k8s.io.Cluster` and not a `gitops.weave.works.GitopsCluster`.
 
 The intention here is stop flux from explicitly deleting subresources of the `Cluster` like
@@ -381,7 +381,7 @@ See the [Template Paths](#template-paths) section for info on certain required p
 - `description`: Description of the parameter. This will be rendered in the UI and CLI
 - `options`: The list of possible values this parameter can be set to.
 - `required` -  Whether the parameter must contain a non-empty value
-- `default` - Default value of the parameter 
+- `default` - Default value of the parameter
 
 Sample:
 ```

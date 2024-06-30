@@ -133,7 +133,7 @@ If BitBucket Server is running on the default port (7990), make sure you include
 
 <TabItem value="azure-devops" label="Azure DevOps">
 
-Navigate to [VisualStudio](https://app.vsaex.visualstudio.com/app/register) and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`. 
+Navigate to [VisualStudio](https://app.vsaex.visualstudio.com/app/register) and register a new application, as explained in the [docs](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops#1-register-your-app). Set the authorization callback URL and select which scopes to grant. Set the callback URL to `<WGE dashboard URL>/oauth/azuredevops`.
 
 Select the `Code (read and write)` scope from the list. This is necessary so that WGE can create pull requests on behalf of users. An example of configuring these settings is shown below.
 
@@ -249,7 +249,7 @@ kubectl -n flux-system rollout restart deploy/weave-gitops-enterprise-mccp-clust
 
 ## 7. Check That It Works
 
-Go to the "services and ingresses" tab in the Azure portal and look for signs that the UI installed. 
+Go to the "services and ingresses" tab in the Azure portal and look for signs that the UI installed.
 
 ## Troubleshooting
 

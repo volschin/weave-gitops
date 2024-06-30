@@ -23,7 +23,7 @@ The 'decision' section has been skipped as the decisions have been made and reve
 
 ## Context
 
-**Note:** throughout this I refer to "auth methods" and "methods" which, for the sake of this document, mean the general process of authenticating who a request is coming from NOT the specific object method which may be called. 
+**Note:** throughout this I refer to "auth methods" and "methods" which, for the sake of this document, mean the general process of authenticating who a request is coming from NOT the specific object method which may be called.
 
 This ADR deals with [autheNtication, not authoriZation](https://www.cloudflare.com/en-gb/learning/access-management/authn-vs-authz/), responsibility for authZ is handed off to Kubernetes.
 

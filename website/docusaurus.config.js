@@ -37,7 +37,7 @@ module.exports = {
       {
         fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
         redirects: [
-          { 
+          {
             to: '/docs/intro-weave-gitops/',
             from: ['/docs/getting-started'],
           },

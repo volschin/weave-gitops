@@ -6,7 +6,7 @@ Proposed
 
 ## Problem
 
-As part of the Core Reloaded Project we have removed the existing acceptance tests within the Weave GitOps Core repo. With the removal of a large number of `gitops` CLI commands, this is a good opportunity to evaluate the testing strategy for the short-mid term. This decision aims to codify discussions around the short/mid-term goals of acceptance testing (or lack thereof) within the GitOps Core product. 
+As part of the Core Reloaded Project we have removed the existing acceptance tests within the Weave GitOps Core repo. With the removal of a large number of `gitops` CLI commands, this is a good opportunity to evaluate the testing strategy for the short-mid term. This decision aims to codify discussions around the short/mid-term goals of acceptance testing (or lack thereof) within the GitOps Core product.
 
 Clear the Way aims to provide a new foundation for the future development of the gitops core product, and therefore much of the existing CLI functionality has been removed and a new approach taken to how we interact with Flux. This resulted in a lack of clarity regarding the purpose and direction of the existing acceptance test, which along with a number of issues with the tests themselves lead to the decision to remove all existing acceptance tests.
 
@@ -39,7 +39,7 @@ The purpose of this decision is **not** to set a series of rules that must be fo
 
 When approaching the use of acceptance tests within the project, consider the following guidelines:
 
-1. Avoid the use of User Interface (UI) testing tools such as Selenium and Cypress for as long as is practical, especially while we focus on product-market fit. 
+1. Avoid the use of User Interface (UI) testing tools such as Selenium and Cypress for as long as is practical, especially while we focus on product-market fit.
 2. Utilise alternative method for testing user interface functionality, such as the [jsdom](https://github.com/jsdom/jsdom) project to simulate UI events within a virtual DOM.
 3. Prefer to make use of alternative testing methods where possible. This is not just limited to unit and integration tests, but also [contract testing](https://pactflow.io/blog/what-is-contract-testing/) and API stubbing.
 

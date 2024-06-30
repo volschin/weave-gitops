@@ -6,7 +6,7 @@ Proposed
 
 ## Problem
 
-As part of the Core Reloaded Project we have removed the existing acceptance tests within the Weave GitOps Core repo. With the removal of a large number of `gitops` CLI commands, this is a good opportunity to evaluate the testing strategy for the short-mid term. This decision aims to codify discussions around the short/mid-term goals of acceptance testing (or lack thereof) within the GitOps Core product. 
+As part of the Core Reloaded Project we have removed the existing acceptance tests within the Weave GitOps Core repo. With the removal of a large number of `gitops` CLI commands, this is a good opportunity to evaluate the testing strategy for the short-mid term. This decision aims to codify discussions around the short/mid-term goals of acceptance testing (or lack thereof) within the GitOps Core product.
 
 Clear the Way aims to provide a new foundation for the future development of the gitops core product, and therefore much of the existing CLI functionality has been removed and a new approach taken to how we interact with Flux. This resulted in a lack of clarity regarding the purpose and direction of the existing acceptance test, which along with a number of issues with the tests themselves lead to the decision to remove all existing acceptance tests.
 

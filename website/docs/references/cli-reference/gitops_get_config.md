@@ -34,4 +34,3 @@ gitops get config
 ### SEE ALSO
 
 * [gitops get](gitops_get.md)	 - Display one or many Weave GitOps resources
-

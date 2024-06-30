@@ -134,8 +134,8 @@ ingress:
   #      - chart-example.local
 extraVolumes: []
 extraVolumeMounts: []
-# Example using extraVolumes and extraVolumeMounts to load 'oidc-auth' secret 
-# with a secrets store CSI driver. Specify the secretName 'oidc-auth' in the 
+# Example using extraVolumes and extraVolumeMounts to load 'oidc-auth' secret
+# with a secrets store CSI driver. Specify the secretName 'oidc-auth' in the
 # secretProviderClass so this will be created by the secrets store CSI driver.
 # See https://secrets-store-csi-driver.sigs.k8s.io/topics/sync-as-kubernetes-secret.html
 # extraVolumeMounts:

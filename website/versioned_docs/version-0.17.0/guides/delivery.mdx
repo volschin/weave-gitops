@@ -22,11 +22,11 @@ strategies](https://docs.flagger.app/usage/deployment-strategies):
 
 ![canary release icon](/img/canary.svg)  **Canary Release** - where traffic is gradually shifted to
 the new version and its performance is assessed. Based on this analysis of KPIs a release is either
-promoted or the update abandoned.  
+promoted or the update abandoned.
 ![a b testing icon](/img/ab.svg)  **A/B Testing** - uses HTTP headers or cookies to ensure users
-  stay on the same version of an application during the canary analysis.  
+  stay on the same version of an application during the canary analysis.
 ![blue green testing icon](/img/blue-green.svg)  **Blue/Green** - where tests are run against the
-  new version, and if successful, traffic is then switched from the current service.  
+  new version, and if successful, traffic is then switched from the current service.
 ![blue green mirroring icon](/img/mirroring.svg)  **Blue/Green with Traffic Mirroring** - sends
   copies of incoming requests to the new version. The user receives the response from the current
   service and the other is discarded. The new version is promoted only if metrics are healthy.
@@ -195,7 +195,7 @@ secretGenerator:
       - issuer.key
 ```
 
-The `secretGenerator` is used to generate Secrets from the generated files. 
+The `secretGenerator` is used to generate Secrets from the generated files.
 
 The `linkerd` directory in the cluster repository should look like this:
 
@@ -217,13 +217,13 @@ Once Flux reconciles this directory to the cluster, Linkerd should get installed
 Before proceeding to the next step, check that all the Linkerd pods have started successfully:
 
 ```bash
-> kubectl get pods -n linkerd 
+> kubectl get pods -n linkerd
 NAME                                      READY   STATUS    RESTARTS   AGE
 linkerd-destination-66d5668b-4mw49        4/4     Running   0          10m
 linkerd-identity-6b4658c74b-6nc97         2/2     Running   0          10m
 linkerd-proxy-injector-6b76789cb4-8vqj4   2/2     Running   0          10m
 
-> kubectl get pods -n linkerd-viz 
+> kubectl get pods -n linkerd-viz
 NAME                            READY   STATUS    RESTARTS   AGE
 grafana-db56d7cb4-xlnn4         2/2     Running   0          10m
 metrics-api-595c7b564-724ps     2/2     Running   0          10m
@@ -233,8 +233,8 @@ tap-injector-54895654bb-9xn7k   2/2     Running   0          10m
 web-6b6f65dbc7-wltdg            2/2     Running   0          10m
 ```
 
-:::note 
-Make sure that any new directories that you add to the cluster repository as part of this guide, 
+:::note
+Make sure that any new directories that you add to the cluster repository as part of this guide,
 are included in a path that Flux reconciles.
 :::
 
@@ -244,7 +244,7 @@ are included in a path that Flux reconciles.
 For the Flagger installation, a Kustomization file will be used to define the installation order and
 provide a default namespace for the installed resources.
 
-Create a new `flagger` directory and make sure it is under a repository path that Flux reconciles. 
+Create a new `flagger` directory and make sure it is under a repository path that Flux reconciles.
 
 Then, add a Namespace resource for Flagger:
 

@@ -10,4 +10,3 @@ spec:
   resources:
   - kind: ConfigMap
     name: calico-crs-configmap
-

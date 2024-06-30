@@ -26,9 +26,9 @@ How to use WGE's progressive delivery offering:
 - view objects from any cluster/namespace that you have the appropriate permissions for, and nothing else
 - if you choose, enable the progressive delivery feature through a feature flag
 
-Supported deployment strategies include: 
+Supported deployment strategies include:
 ![canary release icon](/img/canary.svg)  **Canary Release**: the user gradually shifts traffic to
-a new version of an application and assesses performance—either promoting the release or abandoning it, based on performance.  
+a new version of an application and assesses performance—either promoting the release or abandoning it, based on performance.
 ![a b testing icon](/img/ab.svg)  **A/B Testing**: uses HTTP headers or cookies to ensure users remain on the same version of an application during a canary analysis.
 ![blue green testing icon](/img/blue-green.svg)  **Blue/Green**: Traffic is switched from the current application to a new version based on the success of testing.
 ![blue green mirroring icon](/img/mirroring.svg)  **Blue/Green with Traffic Mirroring**: sends copies of incoming requests to the new version of an application. The user receives the response from the current application and the other is discarded. The new version is promoted only if metrics are healthy.
@@ -223,13 +223,13 @@ Once Flux reconciles this directory to the cluster, Linkerd should be installed.
 Before proceeding to the next step, check that all the Linkerd pods have started successfully:
 
 ```bash
-> kubectl get pods -n linkerd 
+> kubectl get pods -n linkerd
 NAME                                      READY   STATUS    RESTARTS   AGE
 linkerd-destination-66d5668b-4mw49        4/4     Running   0          10m
 linkerd-identity-6b4658c74b-6nc97         2/2     Running   0          10m
 linkerd-proxy-injector-6b76789cb4-8vqj4   2/2     Running   0          10m
 
-> kubectl get pods -n linkerd-viz 
+> kubectl get pods -n linkerd-viz
 NAME                            READY   STATUS    RESTARTS   AGE
 grafana-db56d7cb4-xlnn4         2/2     Running   0          10m
 metrics-api-595c7b564-724ps     2/2     Running   0          10m
@@ -240,7 +240,7 @@ web-6b6f65dbc7-wltdg            2/2     Running   0          10m
 ```
 
 :::info Note
-Any new directories that you add to the cluster repository while following this guide must 
+Any new directories that you add to the cluster repository while following this guide must
 be included in a path that Flux reconciles.
 :::
 
@@ -250,7 +250,7 @@ be included in a path that Flux reconciles.
 To install Flagger, you'll use a Kustomization file that will define the installation order and
 provide a default namespace for the installed resources.
 
-Create a new `flagger` directory. Make sure to locate it under a repository path that Flux reconciles. 
+Create a new `flagger` directory. Make sure to locate it under a repository path that Flux reconciles.
 
 Now add under this directory the three resource manifests for Flagger:
 - A `Namespace` resource to control where the components are installed
@@ -367,7 +367,7 @@ loadtester-855b4d77f6-scl6r   1/1     Running   0          4m
 
 To demonstrate the progressive rollout of an application, we'll use a tiny sample web app called
 [podinfo](https://github.com/stefanprodan/podinfo) and configure a [canary release
-strategy](https://docs.flagger.app/usage/deployment-strategies#canary-release). 
+strategy](https://docs.flagger.app/usage/deployment-strategies#canary-release).
 
 In our example, Flagger will scale up a new version of podinfo (the canary) alongside the existing version (the
 primary). It will gradually increase traffic to the new version in increments of 5%, up to a maximum of

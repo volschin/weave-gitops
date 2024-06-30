@@ -4,7 +4,7 @@ title: Help and Support
 
 ## Community
 
-👋 Come talk to us and other users in the [#weave-gitops channel](https://app.slack.com/client/T2NDH1D9D/C0248LVC719/thread/C2ND76PAA-1621532937.019800) on Weaveworks Community Slack.  
+👋 Come talk to us and other users in the [#weave-gitops channel](https://app.slack.com/client/T2NDH1D9D/C0248LVC719/thread/C2ND76PAA-1621532937.019800) on Weaveworks Community Slack.
 
 [Invite yourself](https://slack.weave.works/) if you haven't joined yet.
 

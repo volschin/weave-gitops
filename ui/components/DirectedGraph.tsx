@@ -57,9 +57,9 @@ function DirectedGraph({
             return (
               <path
                 key={index}
-                d={`M${l.source.x}, ${l.source.y + nodeSize.verticalSeparation} 
-                v${verticalHalf} 
-                H${l.target.x} 
+                d={`M${l.source.x}, ${l.source.y + nodeSize.verticalSeparation}
+                v${verticalHalf}
+                H${l.target.x}
                 v${verticalHalf}`}
               />
             );

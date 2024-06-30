@@ -52,4 +52,3 @@ gitops remove run --no-session
 ### SEE ALSO
 
 * [gitops remove](gitops_remove.md)	 - Remove various components of Weave GitOps
-
