@@ -1,6 +1,7 @@
 # Weave GitOps 🚧 PLAYGROUND 🚧
 
 [![Test status](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml/badge.svg)](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![LICENSE](https://img.shields.io/github/license/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/blob/master/LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/graphs/contributors)
 [![Release](https://img.shields.io/github/v/release/weaveworks/weave-gitops?include_prereleases)](https://github.com/weaveworks/weave-gitops/releases/latest)
