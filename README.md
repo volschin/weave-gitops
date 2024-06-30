@@ -1,4 +1,4 @@
-# Weave GitOps 🚧 PLAYGROUND 🚧
+# Weave GitOps 🚧 PLAYGROUND 🚧 
 
 [![Test status](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml/badge.svg)](https://github.com/volschin/weave-gitops/actions/workflows/pr.yaml)
 [![LICENSE](https://img.shields.io/github/license/volschin/weave-gitops)](https://github.com/volschin/weave-gitops/blob/master/LICENSE)
