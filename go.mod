@@ -205,7 +205,7 @@ require (
 	k8s.io/kubectl v0.30.2
 	k8s.io/utils v0.0.0-20240310230437-4693a0247e57 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
-	sigs.k8s.io/kustomize/kyaml v0.17.0
+	sigs.k8s.io/kustomize/kyaml v0.17.2
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
 )
 
