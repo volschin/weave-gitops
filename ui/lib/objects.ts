@@ -295,7 +295,7 @@ export class HelmRelease extends FluxObject {
   }
 
   get lastAppliedRevision(): string {
-    return this.obj.status?.lastAppliedRevision || "";
+    return this.obj.status?.history?.at(0)?.chartVersion || "";
   }
 
   get lastAttemptedRevision(): string {
