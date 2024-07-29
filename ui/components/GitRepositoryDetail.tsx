@@ -36,7 +36,7 @@ function GitRepositoryDetail({
       ]
     : [];
   const ref = gitRepository.reference?.branch || gitRepository.reference?.commit || gitRepository.reference?.tag || gitRepository.reference?.semver;
-  
+
   return (
     <SourceDetail
       className={className}
