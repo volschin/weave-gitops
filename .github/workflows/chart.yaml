@@ -107,7 +107,7 @@ jobs:
           helm push helm-release/weave-gitops-${{ steps.new_version.outputs.version }}.tgz oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }} &> push-metadata.txt
           CHART_DIGEST=$(awk '/Digest: /{print $2}' push-metadata.txt)
           echo "CHART_DIGEST=${CHART_DIGEST}" | tee -a $GITHUB_ENV
-          cosign sign -y "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops@${CHART_DIGEST}"
-          cosign verify "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops@${CHART_DIGEST}" \
+          cosign sign -y "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops:${{ steps.new_version.outputs.version }}@${CHART_DIGEST}"
+          cosign verify "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops:${{ steps.new_version.outputs.version }}@${CHART_DIGEST}" \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity "https://github.com/${GITHUB_WORKFLOW_REF}"
