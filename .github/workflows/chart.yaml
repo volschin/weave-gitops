@@ -45,6 +45,8 @@ jobs:
   helm-will-release:
     runs-on: ubuntu-latest
     needs: helm-new-version
+    permissions:
+      pull-requests: write
     if: github.event_name == 'pull_request' && needs.helm-new-version.outputs.old-version != needs.helm-new-version.outputs.new-version
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
