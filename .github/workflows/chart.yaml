@@ -79,6 +79,8 @@ jobs:
     if: (github.event_name == 'push' && needs.helm-new-version.outputs.old-version != needs.helm-new-version.outputs.new-version) || github.event_name == 'workflow_dispatch'
     permissions:
       packages: write # needed for ghcr access
+      actions: read # for detecting the Github Actions environment.
+      id-token: write # for creating OIDC tokens for signing.
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Find new version
@@ -98,6 +100,12 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish chart as an OCI image
+      - name: Publish chart as an OCI image and cosign it
         run: |
-          helm push helm-release/weave-gitops-${{ steps.new_version.outputs.version }}.tgz oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}
+          helm push helm-release/weave-gitops-${{ steps.new_version.outputs.version }}.tgz oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }} &> push-metadata.txt
+          CHART_DIGEST=$(awk '/Digest: /{print $2}' push-metadata.txt)
+          echo "CHART_DIGEST=${CHART_DIGEST}" | tee -a $GITHUB_ENV
+          cosign sign -y "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops@${CHART_DIGEST}"
+          cosign verify "oci://${{ env.REGISTRY }}/${{ env.CHART_LOCATION }}/weave-gitops@${CHART_DIGEST}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            --certificate-identity "https://github.com/${GITHUB_WORKFLOW_REF}"
