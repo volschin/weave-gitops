@@ -190,8 +190,8 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.24.0
-	golang.org/x/sys v0.21.0 // indirect
-	golang.org/x/term v0.21.0
+	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/term v0.22.0
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.20.0 // indirect
