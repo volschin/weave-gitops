@@ -59,7 +59,7 @@
     "jest-worker": "^29.7.0",
     "js-sha3": "^0.9.3",
     "lodash": "^4.17.21",
-    "luxon": "^3.4.4",
+    "luxon": "^3.5.0",
     "mnemonic-browser": "^0.0.1",
     "postcss": "^8.4.40",
     "query-string": "^9.1.0",
