@@ -18,7 +18,7 @@ RUN yarn dlx update-browserslist-db
 RUN --mount=type=cache,target=/home/app/ui/.parcel-cache make ui
 
 # Go build
-FROM golang:1.22 AS go-build
+FROM golang:1.23 AS go-build
 
 # Add known_hosts entries for GitHub and GitLab
 RUN mkdir ~/.ssh
