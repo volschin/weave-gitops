@@ -20,7 +20,7 @@
     "@docusaurus/plugin-google-gtag": "^2.4.3",
     "@docusaurus/preset-classic": "^2.4.3",
     "@docusaurus/plugin-sitemap": "^2.4.3",
-    "@docusaurus/theme-search-algolia": "^2.4.3",
+    "@docusaurus/theme-search-algolia": "^3.5.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
