@@ -53,7 +53,7 @@
     "d3": "^7.9.0",
     "d3-dag": "^1.1.0",
     "history": "^5.3.0",
-    "http-proxy-middleware": "^3.0.0",
+    "http-proxy-middleware": "^3.0.3",
     "jest-canvas-mock": "^2.5.2",
     "jest-fail-on-console": "^3.3.0",
     "jest-worker": "^29.7.0",
